@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Series Page</title>
+  <link rel="icon" href="../assets/moviemania-logo.png" type="image/png">
+  <link rel="stylesheet" href="../main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1><a href="/home/">MovieMania</a></h1>
+     <nav class="main-nav">
+  <ul class="nav-menu">
+    <li><a href="/home/">Home</a></li>
+    <li><a href="/category/?category=anime">Anime</a></li>
+    <li><a href="/category/?category=movie">Movies</a></li>
+
+    <li class="dropdown">
+      <a href="#">Web Series</a>
+      <ul class="dropdown-menu">
+        <li><a href="/home/?category=indian-web-series">Indian Web Series</a></li>
+        <li><a href="/home/?category=foreign-web-series">Foreign Web Series</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <a href="#">Genre</a>
+      <ul class="dropdown-menu">
+        <li><a href="/home/?category=action">Action</a></li>
+        <li><a href="/home/?category=comedy">Comedy</a></li>
+        <li><a href="/home/?category=drama">Drama</a></li>
+        <li><a href="/home/?category=romance">Romance</a></li>
+        <li><a href="/home/?category=nudity">Nudity</a></li>
+      </ul>
+    </li>
+    <li><a href="/donate/">Donate</a></li>
+
+  </ul>
+</nav>
+  </header>
+
+  <main class="episode-page">
+    <section class="episode-container">
+      <h2 id="series-title">Loading...</h2>
+      <p id="series-desc" class="series-desc">Please wait...</p>
+      <div id="episode-list" class="episode-list"></div>
+    </section>
+  </main>
+
+  <div class="social-icon-section">
+    <h3>Follow Us On</h3>
+      <div class="social-icon-bar">
+        <a href="https://www.instagram.com/ab_html" class="icon instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://t.me/MovieMania_Html" class="icon telegram" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+        <a href="#" class="icon facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="icon youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+      </div>
+  </div>
+
+  <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <p>Disclaimer: MovieMania does not host any files on its servers. All point to content hosted on third-party websites.</p>
+                <p>MovieMania does not accept responsibility for content hosted on third-party websites and does not have any involvement in the same.</p>
+            </div>
+          
+            <div class="footer-bottom">
+                <p>&copy; 2025 <a href="/home/">MovieMania</a>. All Rights Reserved.</p>
+            </div>
+            <div class="footer-bottom">
+                <a href="/contact/">Contact Us</a> | <a href="/about/">About Us</a> | <a href="/follow/">Follow Us</a>
+            </div>
+        </div>
+    </footer>
+
+  <script src="series.js"></script>
+</body>
+</html>
