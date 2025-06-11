@@ -17,12 +17,12 @@ function getAdminUsername() {
 function logout() {
   sessionStorage.removeItem("admin_auth");
   sessionStorage.removeItem("admin_user");
-  window.location.href = "login.html";
+  window.location.href = "/admin/login/";
 }
 
 function isAuthenticated() {
   if (!sessionStorage.getItem("admin_auth")) {
-    window.location.href = "login.html";
+    window.location.href = "/admin/login/";
   }
 }
 
@@ -659,7 +659,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Login function for login.html
+// Login function for /admin/login/
 function login() {
   const username = val("username");
   const password = val("password");
@@ -681,7 +681,7 @@ function login() {
         sessionStorage.setItem("admin_auth", "true");
         sessionStorage.setItem("admin_user", data.user.username);
         sessionStorage.setItem("jwt_token", data.token);
-        window.location.href = "dashboard.html";
+        window.location.href = "/admin/dashboard/";
       } else {
         document.getElementById("error").textContent = data.message || "Invalid credentials.";
       }
