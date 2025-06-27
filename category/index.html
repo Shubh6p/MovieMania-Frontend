@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Category | MovieMania</title>
+  <link rel="stylesheet" href="../main.css" />
+  <link rel="icon" href="../assets/moviemania-logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1><a href="/home/">MovieMania</a></h1>
+     <nav class="main-nav">
+  <ul class="nav-menu">
+    <li><a href="/home/">Home</a></li>
+    <li><a href="/category/?category=anime">Anime</a></li>
+    <li><a href="/category/?category=movie">Movies</a></li>
+
+    <li class="dropdown">
+      <a href="#">Web Series</a>
+      <ul class="dropdown-menu">
+        <li><a href="/home/?category=netflix">Netflix</a></li>
+        <li><a href="/home/?category=prime-video">Prime Video</a></li>
+        <li><a href="/home/?category=indian-web-series">Indian</a></li>
+        <li><a href="/home/?category=foreign-web-series">Foreign</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <a href="#">Genre</a>
+      <ul class="dropdown-menu">
+        <li><a href="/home/?category=action">Action</a></li>
+        <li><a href="/home/?category=thriller">Thriller</a></li>
+        <li><a href="/home/?category=horror">Horror</a></li>
+        <li><a href="/home/?category=crime">Crime</a></li>
+        <li><a href="/home/?category=sci-fi">Sci-Fi</a></li>
+        <li><a href="/home/?category=comedy">Comedy</a></li>
+        <li><a href="/home/?category=drama">Drama</a></li>
+        <li><a href="/home/?category=romance">Romance</a></li>
+        <li><a href="/home/?category=fantasy">Fantasy</a></li>
+        <li><a href="/home/?category=documentry">Documentry</a></li>
+        <li><a href="/home/?category=adventure">Adventure</a></li>
+        <li><a href="/home/?category=mystery">Mystery</a></li>
+        <li><a href="/home/?category=heist">Heist</a></li>
+        <li><a href="/home/?category=history">History</a></li>
+        <li><a href="/home/?category=nudity">Nudity</a></li>
+      </ul>
+    </li>
+    <li><a href="/donate/">Donate</a></li>
+
+  </ul>
+</nav>
+  </header>
+
+  <div class="top-filters" id="topFilters"></div>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for a movie..." />
+    <div id="searchResults" class="results-dropdown"></div>
+  </div>
+
+  <section id="moviesContainer" class="movies"></section>
+  <div id="pagination" class="pagination"></div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <p>Disclaimer: MovieMania does not host any files on its servers. All point to content hosted on third-party websites.</p>
+                <p>MovieMania does not accept responsibility for content hosted on third-party websites and does not have any involvement in the same.</p>
+            </div>
+          
+            <div class="footer-bottom">
+                <p>&copy; 2025 <a href="/home/">MovieMania</a>. All Rights Reserved.</p>
+            </div>
+            <div class="footer-bottom">
+                <a href="/contact/">Contact Us</a> | <a href="/about/">About Us</a> | <a href="/follow/">Follow Us</a>
+            </div>
+        </div>
+    </footer>
+
+  <script src="../script.js"></script>
+  <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const url = new URL(window.location);
+    const currentCategory = url.searchParams.get('category')?.toLowerCase() || 'movies';
+    const topFilters = document.getElementById('topFilters');
+
+    // Define all filters in one place
+    const filterPresets = {
+      anime: [
+        { name: 'Hindi Dubbed', value: 'hindi-dubbed' },
+        { name: 'Dual [Eng+Jap]', value: 'dual' },
+        { name: 'Action', value: 'action' },
+        { name: 'Comedy', value: 'comedy' },
+        { name: 'Drama', value: 'drama' },
+        { name: 'Fantasy', value: 'fantasy' },
+        { name: 'Rommance', value: 'rommance' },
+        { name: 'Sci-Fi', value: 'sci-fi' },
+        { name: 'Sports', value: 'sports' },
+        { name: 'Supernatural', value: 'supernatural' },
+        { name: 'Thriller', value: 'thriller' },
+        { name: 'Slice of Life', value: 'slice-of-life' },
+        { name: 'Manga', value: 'manga' },
+        { name: 'Ecchi', value: 'ecchi' },
+        { name: 'Hentai 18+', value: 'hentai' }
+
+      ],
+      movie: [
+        { name: 'Latest', value: 'latest' },
+        { name: 'Bollywood', value: 'bollywood' },
+        { name: 'Hollywood', value: 'hollywood' },
+        { name: 'Hindi Dubbed', value: 'hindi-dubbed' },
+        { name: 'Web Series', value: 'web-series' },
+        { name: 'Zombie', value: 'zombie' },
+        { name: 'War', value: 'war' },
+        { name: 'Magic', value: 'magic' },
+        { name: 'Top Rated', value: 'top-rated' },
+        { name: 'Adult 18+', value: '18+' },
+      ]
+    };
+
+    const filters = filterPresets[currentCategory] || [];
+
+    topFilters.innerHTML = filters.map(f =>
+      `<a href="/category/?category=${currentCategory}&filter=${f.value}" class="filter-btn">${f.name}</a>`
+    ).join('');
+  });
+</script>
+
+</body>
+</html>
