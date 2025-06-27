@@ -16,7 +16,7 @@ const isIndex = !!moviesContainer;
 const isMoviePage = window.location.pathname.includes('/movie/');
 
 if (isIndex) {
-  fetch('http://localhost:3000/api/movies')
+  fetch('https://moviemania-backend-31wk.onrender.com/api/movies')
     .then(response => response.json())
     .then(data => {
       allMovies = data;
@@ -169,7 +169,7 @@ if (isIndex) {
 
 if (isMoviePage) {
   const movieId = new URLSearchParams(window.location.search).get('id');
-  fetch('http://localhost:3000/api/movie')
+  fetch('https://moviemania-backend-31wk.onrender.com/api/movie')
     .then(res => res.json())
     .then(movies => {
       const movie = movies.find(m => m.id === movieId);
@@ -212,7 +212,7 @@ if (isMoviePage) {
 if (searchInput && searchResults) {
   let allSearchableMovies = [];
 
-  fetch('http://localhost:3000/api/movies')
+  fetch('https://moviemania-backend-31wk.onrender.com/api/movies')
     .then(response => response.json())
     .then(data => {
       allSearchableMovies = data;
