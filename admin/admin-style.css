@@ -1,0 +1,260 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Rowdies&display=swap');
+
+:root {
+  --bg-color: #0f0f0f;
+  --container-bg: #1e1e1e;
+  --input-bg: #2a2a2a;
+  --text-color: #f3f4f6;
+  --primary: #dc2626;
+  --primary-hover: #b91c1c;
+  --accent: #ef4444;
+  --error: #dc2626;
+  --success: #16a34a;
+  --warning: #facc15;
+  --radius: 0.5rem;
+  --shadow: 0 4px 24px rgba(255, 0, 0, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Rowdies', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 2rem;
+}
+
+h1, h2 {
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+}
+
+.container, .form-container, .login-box {
+  max-width: 720px;
+  margin: auto;
+  background-color: var(--container-bg);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+  background-color: var(--input-bg);
+  border: 1px solid #3b3b3b;
+  border-radius: var(--radius);
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: var(--primary);
+  border: none;
+  border-radius: var(--radius);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+}
+
+pre {
+  background-color: #111;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: var(--radius);
+  white-space: pre-wrap;
+  font-family: monospace;
+  overflow-x: auto;
+  border: 1px solid #2f2f2f;
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.nav a {
+  text-decoration: none;
+  padding: 1rem;
+  display: block;
+  background-color: #222;
+  color: white;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.nav a:hover,
+.nav a.active {
+  background-color: var(--primary);
+  color: white;
+}
+
+img.preview {
+  margin-top: 1rem;
+  max-width: 200px;
+  border-radius: var(--radius);
+}
+
+.header {
+  background-color: #1e1e1e;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--primary);
+}
+
+.profile-wrapper {
+  margin-left: auto;
+  position: relative;
+}
+
+.profile-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background-color: var(--container-bg);
+  border: 1px solid #333;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  z-index: 1000;
+  min-width: 180px;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dropdown-menu a:hover {
+  background-color: var(--primary-hover);
+  color: white;
+}
+
+.profile-container:hover .dropdown-menu,
+.profile-container:focus-within .dropdown-menu {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
+
+  .form-container, .container, .login-box {
+    padding: 1.5rem;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+.panel {
+  display: none;
+  margin-top: 2rem;
+}
+
+.panel.active {
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.session-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.session-table th, .session-table td {
+  padding: 8px 12px;
+  border: 1px solid #aaa;
+  text-align: left;
+}
+
+.notification-list p {
+  padding: 6px 0;
+  border-bottom: 1px dashed #555;
+  font-size: 0.95rem;
+  color: #ddd;
+} 
+
+
+/* Notification Styling */
+.notification-item {
+  border-bottom: 1px dotted #666;
+  padding: 8px 10px;
+}
+
+.notif-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.notif-text {
+  flex: 1;
+  word-break: break-word;
+  white-space: normal;
+  font-size: 0.95em;
+  max-width: calc(100% - 40px); /* adjust based on checkbox width */
+}
+
+.notif-checkbox {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+

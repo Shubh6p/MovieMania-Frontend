@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Category | MovieMania</title>
+  <link rel="icon" href="../assets/moviemania-logo.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../main.css">
+
+  <link rel="icon" href="assets/moviemania-logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet">
+  <!-- <style>
+    body { font-family: 'Rowdies', sans-serif; background-color: #111; color: #fff; }
+    h1, h2, h3 { font-family: 'Special Elite', cursive; }
+  </style> -->
+</head>
+<body class="bg-[#111] text-white">
+  <!-- Header -->
+  <header class="flex justify-between items-center flex-wrap p-4 md:p-6 bg-[#222] relative">
+    <h1 class="text-red-600 text-2xl md:text-3xl drop-shadow-lg">
+      <a href="/home/" class="no-underline">MovieMania</a>
+    </h1>
+    <button id="menuToggle" class="text-white text-3xl md:hidden">&#9776;</button>
+    <nav id="mainNav" class="hidden md:flex flex-col md:flex-row md:items-center md:space-x-4 absolute md:static top-full right-0 bg-[#222] md:bg-transparent w-48 md:w-auto z-50">
+      <ul class="nav-menu list-none flex flex-col md:flex-row gap-2 md:gap-4">
+        <li><a href="/home/" class="block px-3 py-2 hover:text-red-500">Home</a></li>
+        <li><a href="/category/?category=anime" class="block px-3 py-2 hover:text-red-500">Anime</a></li>
+        <li><a href="/category/?category=movie" class="block px-3 py-2 hover:text-red-500">Movies</a></li>
+        <li class="relative group">
+          <a href="#" class="block px-3 py-2 hover:text-red-500">Web Series</a>
+          <ul class="absolute hidden group-hover:block bg-[#111] min-w-[180px] z-50">
+            <li><a href="/home/?category=netflix" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Netflix</a></li>
+            <li><a href="/home/?category=prime-video" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Prime Video</a></li>
+            <li><a href="/home/?category=indian-web-series" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Indian</a></li>
+            <li><a href="/home/?category=foreign-web-series" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Foreign</a></li>
+          </ul>
+        </li>
+        <li class="relative group">
+          <a href="#" class="block px-3 py-2 hover:text-red-500">Genre</a>
+          <ul class="absolute hidden group-hover:block bg-[#111] min-w-[180px] z-50">
+            <li><a href="/home/?category=action" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Action</a></li>
+            <li><a href="/home/?category=thriller" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Thriller</a></li>
+            <li><a href="/home/?category=horror" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Horror</a></li>
+            <li><a href="/home/?category=crime" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Crime</a></li>
+            <li><a href="/home/?category=sci-fi" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Sci-Fi</a></li>
+            <li><a href="/home/?category=comedy" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Comedy</a></li>
+            <li><a href="/home/?category=drama" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Drama</a></li>
+            <li><a href="/home/?category=romance" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Romance</a></li>
+            <li><a href="/home/?category=fantasy" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Fantasy</a></li>
+            <li><a href="/home/?category=documentry" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Documentry</a></li>
+            <li><a href="/home/?category=adventure" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Adventure</a></li>
+            <li><a href="/home/?category=mystery" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Mystery</a></li>
+            <li><a href="/home/?category=heist" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Heist</a></li>
+            <li><a href="/home/?category=history" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">History</a></li>
+            <li><a href="/home/?category=nudity" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Nudity</a></li>
+          </ul>
+        </li>
+        <li><a href="/donate/" class="block px-3 py-2 hover:text-red-500">Donate</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Top Filters -->
+  <div id="topFilters" class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-5 gap-4 max-w-[1000px] mx-auto my-6"></div>
+
+  <!-- Search Bar -->
+  <form class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for movies..." autocomplete="off" />
+    <div id="searchResults" class="results-dropdown"></div>
+  </form>
+
+  <!-- Movies Container -->
+  <section id="moviesContainer" class="movies"></section>
+
+  <!-- Pagination -->
+  <div id="pagination" class="text-center py-6"></div>
+
+  <!-- Footer -->
+  <footer class="bg-[#222] text-gray-400 py-8 text-center">
+    <div class="max-w-[1000px] mx-auto">
+      <div>
+        <p>Disclaimer: MovieMania does not host any files on its servers. All point to content hosted on third-party websites.</p>
+        <p>MovieMania does not accept responsibility for content hosted on third-party websites and does not have any involvement in the same.</p>
+      </div>
+      <div class="mt-4">
+        <p>&copy; 2025 <a href="/home/" class="text-gray-400 hover:text-red-500">MovieMania</a>. All Rights Reserved.</p>
+      </div>
+      <div class="mt-2">
+        <a href="/contact/" class="text-gray-400 hover:text-red-500">Contact Us</a> | 
+        <a href="/about" class="text-gray-400 hover:text-red-500">About Us</a> | 
+        <a href="/follow/" class="text-gray-400 hover:text-red-500">Follow Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('mainNav').classList.toggle('hidden');
+  });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const url = new URL(window.location);
+    const currentCategory = url.searchParams.get('category')?.toLowerCase() || 'movies';
+    const topFilters = document.getElementById('topFilters');
+
+    const filterPresets = {
+      anime: [
+        { name: 'Hindi', value: 'hindi-dubbed' },
+        { name: '[Eng+Jap]', value: 'dual' },
+        { name: 'Action', value: 'action' },
+        { name: 'Comedy', value: 'comedy' },
+        { name: 'Drama', value: 'drama' },
+        { name: 'Fantasy', value: 'fantasy' },
+        { name: 'Romance', value: 'romance' },
+        { name: 'Sci-Fi', value: 'sci-fi' },
+        { name: 'Sports', value: 'sports' },
+        { name: 'Supernatural', value: 'supernatural' },
+        { name: 'Thriller', value: 'thriller' },
+        { name: 'Isekai', value: 'isekai' },
+        { name: 'Manga', value: 'manga' },
+        { name: 'Ecchi', value: 'ecchi' },
+        { name: 'Hentai 18+', value: 'hentai' }
+      ],
+      movie: [
+        { name: 'Latest', value: 'latest' },
+        { name: 'Bollywood', value: 'bollywood' },
+        { name: 'Hollywood', value: 'hollywood' },
+        { name: 'Hindi Dubbed', value: 'hindi-dubbed' },
+        { name: 'Web Series', value: 'web-series' },
+        { name: 'Zombie', value: 'zombie' },
+        { name: 'War', value: 'war' },
+        { name: 'Magic', value: 'magic' },
+        { name: 'Top Rated', value: 'top-rated' },
+        { name: 'Adult 18+', value: '18+' },
+      ]
+    };
+
+    const filters = filterPresets[currentCategory] || [];
+    let expanded = false;
+
+    function renderFilters() {
+      let itemsToShow = filters;
+      if (window.innerWidth < 640 && !expanded) {
+        // Mobile collapsed mode → first 5 filters + "More" button
+        itemsToShow = filters.slice(0, 5);
+        itemsToShow.push({ name: 'More 🔻', value: '__more__' });
+      }
+      
+      topFilters.innerHTML = itemsToShow.map(f =>
+        `<a href="${f.value === '__more__' ? '#' : `/category/?category=${currentCategory}&filter=${f.value}`}" 
+           class="flex items-center justify-center bg-[#1f1f1f] text-white px-4 py-2 rounded-lg font-bold hover:bg-[#333] hover:text-red-500 transition"
+           ${f.value === '__more__' ? 'data-more-btn' : ''}>
+           ${f.name}
+         </a>`
+      ).join('');
+
+      // Attach click handler for More/Show Less
+      const moreBtn = topFilters.querySelector('[data-more-btn]');
+      if (moreBtn) {
+        moreBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          expanded = true;
+          renderFilters();
+        });
+      }
+
+      // If expanded on mobile, add Show Less button
+      if (expanded && window.innerWidth < 640) {
+        const showLessBtn = document.createElement('a');
+        showLessBtn.href = '#';
+        showLessBtn.textContent = 'Less 🔼';
+        showLessBtn.className = 'flex items-center justify-center bg-[#1f1f1f] text-white px-4 py-2 rounded-lg font-bold hover:bg-[#333] hover:text-red-500 transition';
+        showLessBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          expanded = false;
+          renderFilters();
+        });
+        topFilters.appendChild(showLessBtn);
+      }
+    }
+
+    renderFilters();
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 640) expanded = true;
+      renderFilters();
+    });
+  });
+</script>
+</body>
+</html>

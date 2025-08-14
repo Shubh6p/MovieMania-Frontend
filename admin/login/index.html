@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login - MovieMania</title>
+  <link rel="icon" href="../assets/moviemania-logo.png" type="image/png">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Background Gradient Animation */
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    body {
+      background: linear-gradient(45deg, #1e2a34, #3b4c5c, #0d1b2a);
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* Particle Background */
+    .particle-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      transform: translateZ(0);
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.4);
+      animation: moveParticles 5s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes moveParticles {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(100px, -100px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    /* 3D Hover Effect for Card */
+    .card-3d {
+      transition: transform 0.6s ease-out, box-shadow 0.6s ease-out;
+      transform: perspective(1500px) rotateY(0deg) rotateX(0deg);
+    }
+
+    .card-3d:hover {
+      transform: perspective(1500px) rotateY(15deg) rotateX(10deg);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Morphing Effect on Input Fields */
+    .input-glow {
+      padding-left: 36px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .input-glow:focus {
+      padding-left: 50px;
+      transform: scale(1.05);
+      border: 2px solid #ff4d4f;
+      box-shadow: 0 0 8px rgba(255, 77, 79, 0.7);
+    }
+
+    /* Icon Positioning */
+    .input-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #a0a0a0;
+    }
+
+    /* Button Hover Effects */
+    .button-hover {
+      transition: all 0.3s ease-in-out;
+    }
+
+    .button-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 10px 30px rgba(255, 77, 79, 0.4);
+      background-color: #ff4d4f;
+      border: 1px solid #ff4d4f;
+      animation: pulse 1s ease-in-out infinite;
+    }
+
+    /* Pulse Animation for Buttons */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Logo Animation */
+    .logo {
+      animation: logoAnimation 2s ease-out;
+    }
+
+    @keyframes logoAnimation {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body class="flex justify-center items-center p-6 relative bg-gradient-to-r from-purple-700 via-indigo-800 to-blue-900">
+
+  <!-- Particle Container -->
+  <div class="particle-container">
+    <div class="particle" style="width: 20px; height: 20px; top: 10%; left: 30%; animation-delay: 0s;"></div>
+    <div class="particle" style="width: 15px; height: 15px; top: 40%; left: 60%; animation-delay: 2s;"></div>
+    <div class="particle" style="width: 25px; height: 25px; top: 70%; left: 80%; animation-delay: 4s;"></div>
+    <div class="particle" style="width: 10px; height: 10px; top: 90%; left: 40%; animation-delay: 1.5s;"></div>
+  </div>
+
+  <!-- Login Card -->
+  <div class="bg-gray-800 p-8 rounded-3xl shadow-2xl max-w-md w-full space-y-8 card-3d transform transition-all duration-500">
+    
+    <!-- Logo Animation -->
+    <div class="text-center mb-6">
+      <img src="../assets/moviemania-logo.png" alt="MovieMania Logo" class="logo w-20 mx-auto">
+    </div>
+    
+    <!-- Title -->
+    <h2 class="text-4xl text-center text-red-500 font-semibold mb-6">Admin Login</h2>
+
+    <!-- Form -->
+    <form id="loginForm" class="space-y-6">
+      
+      <!-- Username Input -->
+      <div class="relative input-container">
+        <input type="text" id="username" placeholder="   Username" required 
+          class="w-full px-6 py-3 bg-gray-700 text-white border border-gray-600 rounded-xl focus:outline-none placeholder-gray-400 input-glow transition duration-300 ease-in-out" />
+        <span class="input-icon">👤</span>
+      </div>
+
+      <!-- Password Input -->
+      <div class="relative input-container">
+        <input type="password" id="password" placeholder="   Password" required 
+          class="w-full px-6 py-3 bg-gray-700 text-white border border-gray-600 rounded-xl focus:outline-none placeholder-gray-400 input-glow transition duration-300 ease-in-out" />
+        <span class="input-icon">🔒</span>
+      </div>
+      
+      <!-- Submit Button -->
+      <button type="submit" 
+        class="w-full py-3 bg-red-600 text-white font-semibold rounded-xl button-hover">
+        Login
+      </button>
+    </form>
+
+    <!-- Error Message -->
+    <div id="error" class="text-red-500 mt-4 text-center hidden text-lg font-medium"></div>
+
+    <!-- Forgot Password Link -->
+    <div class="text-center text-sm text-gray-500 mt-6">
+      <p>Forgot your password? <a href="forgot-password.html" class="text-blue-500 hover:underline">Reset here</a></p>
+    </div>
+  </div>
+
+  <script src="../admin-script.js" defer></script>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // ⛔ Prevent the form from reloading the page
+      login();            // ✅ Call your existing login function
+    });
+  </script>
+</body>
+</html>

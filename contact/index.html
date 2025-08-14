@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact MovieMania</title>
+  <link rel="icon" href="../assets/moviemania-logo.png" type="image/png">
+  <link rel="stylesheet" href="../main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1><a href="/home/">MovieMania</a></h1>
+     <nav class="main-nav">
+  <ul class="nav-menu">
+    <li><a href="/home/">Home</a></li>
+    <li><a href="/category/?category=anime">Anime</a></li>
+    <li><a href="/category/?category=movie">Movies</a></li>
+
+    <li class="dropdown">
+      <a href="#">Web Series</a>
+      <ul class="dropdown-menu">
+        <li><a href="/home/?category=indian-web-series">Indian Web Series</a></li>
+        <li><a href="/home/?category=foreign-web-series">Foreign Web Series</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <a href="#">Genre</a>
+      <ul class="dropdown-menu">
+        <li><a href="/home/?category=action">Action</a></li>
+        <li><a href="/home/?category=comedy">Comedy</a></li>
+        <li><a href="/home/?category=drama">Drama</a></li>
+        <li><a href="/home/?category=romance">Romance</a></li>
+        <li><a href="/home/?category=nudity">Nudity</a></li>
+      </ul>
+    </li>
+    <li><a href="/donate/">Donate</a></li>
+  </ul>
+</nav>
+  </header>
+
+  <main class="contact-section">
+    <section class="contact-container">
+      <h2>Contact Us</h2>
+      <p>We'd love to hear from you! Use the form below to send feedback or movie requests.</p>
+
+      <form class="contact-form" action="#" method="POST">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="John Doe" required />
+
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" placeholder="john@example.com" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Type your message here..." rows="6" required></textarea>
+
+        <button type="submit" class="contact-btn">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <p>Disclaimer: MovieMania does not host any files on its servers. All content points to third-party sites.</p>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 <a href="/home/">MovieMania</a>. All Rights Reserved.</p>
+        <a href="/contact/">Contact Us</a> | <a href="/about/">About Us</a> | <a href="/follow/">Follow Us</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+  document.querySelector(".contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert("Thank you for contacting MovieMania! We’ll get back to you soon.");
+  });
+</script>
+
+</body>
+</html>

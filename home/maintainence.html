@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Site Under Maintenance | MovieMania</title>
+  <link rel="icon" href="../assets/moviemania-logo.png" type="image/png">
+  <link rel="stylesheet" href="../main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet" />
+  <style>
+    .maintenance-section {
+      min-height: 100vh;
+      background-color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      color: #fff;
+      flex-direction: column;
+    }
+
+    .maintenance-section h1 {
+      font-family: 'Special Elite', cursive;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: blue;
+    }
+
+    .maintenance-section p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    .spinner {
+      border: 6px solid #333;
+      border-top: 6px solid blue;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1.5rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .contact-btn {
+      background-color: blue;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      background-color: #3366ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="maintenance-section">
+    <div class="spinner"></div>
+    <h1>We'll Be Right Back!</h1>
+    <p>MovieMania is currently undergoing scheduled maintenance.<br>
+       We're working hard to bring everything back online as soon as possible.</p>
+  </div>
+</body>
+</html>
