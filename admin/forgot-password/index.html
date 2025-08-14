@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forgot Password - MovieMania</title>
+  <link rel="icon" href="../assets/moviemania-logo.png" type="image/png">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Background Gradient (Matching Login Page) */
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    body {
+      background: linear-gradient(45deg, #6a1b9a, #8e24aa, #c2185b);
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite;
+      height: 100vh;
+    }
+
+    /* Popup Card */
+    .popup-card {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #4caf50;
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      text-align: center;
+    }
+
+    .popup-card.visible {
+      display: block;
+      opacity: 1;
+    }
+
+    .popup-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .popup-card p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    /* Form Card Animation */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .form-card {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    /* Form Input Focus Effects */
+    input, select, button {
+      transition: all 0.3s ease-in-out;
+    }
+
+    input:focus, select:focus, button:focus {
+      transform: scale(1.02);
+      box-shadow: 0 0 8px rgba(255, 99, 132, 0.6);
+      border-color: #e91e63;
+    }
+
+    /* Button Hover Effects */
+    button:hover {
+      background-color: #d81b60;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body class="flex justify-center items-center h-screen p-6 relative bg-gradient-to-r from-purple-700 via-indigo-800 to-blue-900">
+
+  <!-- Forgot Password Card -->
+  <div class="form-card bg-gray-800 p-8 rounded-3xl shadow-2xl max-w-md w-full space-y-8">
+
+    <!-- Logo -->
+    <div class="text-center mb-6">
+      <img src="../assets/moviemania-logo.png" alt="MovieMania Logo" class="w-20 mx-auto">
+    </div>
+    
+    <!-- Title -->
+    <h2 class="text-3xl text-center text-red-500 font-semibold mb-6">Forgot Password</h2>
+
+    <!-- Form -->
+    <form id="forgotPasswordForm" class="space-y-6">
+      <p class="text-gray-400 text-center">Enter your details to request a password reset or retrieve your credentials.</p>
+      
+      <!-- Full Name Input -->
+      <div class="relative">
+        <input type="text" id="fullName" placeholder="Full Name" required 
+          class="w-full px-6 py-3 bg-gray-700 text-white border border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent placeholder-gray-400 transition duration-300 ease-in-out" />
+      </div>
+
+      <!-- Email Address Input -->
+      <div class="relative">
+        <input type="email" id="email" placeholder="Email Address" required 
+          class="w-full px-6 py-3 bg-gray-700 text-white border border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent placeholder-gray-400 transition duration-300 ease-in-out" />
+      </div>
+
+      <!-- Password Type (New or Existing) -->
+      <div class="relative">
+        <select id="passwordType" name="passwordType" required 
+          class="w-full px-6 py-3 bg-gray-700 text-white border border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent placeholder-gray-400 transition duration-300 ease-in-out">
+          <option value="">Select Password Type</option>
+          <option value="new">New Password</option>
+          <option value="existing">Existing Password</option>
+        </select>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" 
+        class="w-full py-3 bg-red-600 text-white font-semibold rounded-xl hover:bg-red-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-500">
+        Submit Request
+      </button>
+    </form>
+
+    <!-- Success/Error Message -->
+    <div id="statusMessage" class="text-center mt-4 text-lg font-medium text-gray-400"></div>
+    
+    <div class="text-center text-sm text-gray-500 mt-6">
+      <p>Remembered your password? <a href="/admin/login/" class="text-blue-500 hover:underline">Login here</a></p>
+    </div>
+  </div>
+
+  <!-- Popup Message -->
+  <div id="popupMessage" class="popup-card">
+    <h3 class="font-medium text-lg">Request Submitted</h3>
+    <p>Your request is being reviewed by the owner. You will receive your credentials soon.</p>
+    <a href="/admin/login/" class="mt-4 inline-block py-2 px-6 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition duration-300 ease-in-out">
+      Go Back to Login
+    </a>
+  </div>
+
+  <script src="../admin-script.js" defer></script>
+  <script>
+    document.getElementById("forgotPasswordForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // Prevent form reload
+      
+      const fullName = document.getElementById("fullName").value;
+      const email = document.getElementById("email").value;
+      const passwordType = document.getElementById("passwordType").value;
+      
+      // Validate input fields
+      if (!fullName || !email || !passwordType) {
+        document.getElementById("statusMessage").innerText = "Please fill in all fields.";
+        return;
+      }
+
+      // Simulate sending the request to the backend
+      document.getElementById("statusMessage").innerText = "Submitting request...";
+
+      // Simulate backend response after submission
+      setTimeout(() => {
+        // Hide form and show popup
+        document.getElementById("forgotPasswordForm").classList.add("hidden");
+        document.getElementById("popupMessage").classList.add("visible");
+
+        // Update popup message
+        document.getElementById("popupMessage").innerHTML = `
+          <h3 class="font-medium text-lg">Request Submitted</h3>
+          <p>Your request is being reviewed by the owner. You will receive your credentials soon.</p>
+          <a href="login.html" class="mt-4 inline-block py-2 px-6 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition duration-300 ease-in-out">
+            Go Back to Login
+          </a>
+        `;
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
