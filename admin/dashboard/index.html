@@ -10,7 +10,7 @@
 </head>
 <body onload="isAuthenticated(); loadMyProfile()">
   <div class="header">
-    <h1><a href="/admin/dashboard/" style="color: inherit; text-decoration: none;">MovieMania Admin</a></h1>
+    <h1><a href="dashboard.html" style="color: inherit; text-decoration: none;">MovieMania Admin</a></h1>
     <div class="profile-container" tabindex="0">
       <div class="profile-icon">P</div>
         <div class="dropdown-menu">
@@ -96,17 +96,25 @@
     </div>
 
     <div id="addSeries" class="panel form-container">
-      <h2>Add Series</h2>
-      <input id="seriesId" placeholder="e.g., naruto" />
-      <input id="seriesTitle" placeholder="e.g., Naruto - Season 1" />
-      <textarea id="description" placeholder="Enter brief summary of the series..."></textarea>
-      <input id="episodeCount" placeholder="e.g., 12" />
-      <input id="qualities" value="480p,720p,1080p" />
-      <input id="linkPattern" value="links/{id}-e{num}-{quality}.mp4" />
-      <button onclick="generateSeriesJSON()">Generate JSON</button>
-      <button onclick="saveSeriesToServer()">Save to Server</button>
-      <pre id="output"></pre>
+      <h2 class="text-xl font-bold mb-4">Add Series</h2>
+      
+      <input id="seriesId" placeholder="Series ID (e.g. naruto)" class="border p-2 rounded w-full mb-2"/>
+      <input id="seriesTitle" placeholder="Series Title" class="border p-2 rounded w-full mb-2"/>
+      <textarea id="description" placeholder="Enter brief summary of the series..." class="border p-2 rounded w-full mb-2"></textarea>
+      <input id="seriesPoster" placeholder="Poster URL" class="border p-2 rounded w-full mb-2"/>
+      
+      <input id="seasonCount" type="number" placeholder="Number of Seasons" class="border p-2 rounded w-full mb-4" oninput="renderSeasonInputs()" />
+      
+      <!-- Season inputs will be generated here -->
+      <div id="seasonInputs" class="space-y-6"></div>
+
+      <button onclick="generateSeriesJSON()" class="bg-blue-500 text-white px-4 py-2 rounded">Generate JSON</button>
+      <button onclick="saveSeriesToServer()" class="bg-green-500 text-white px-4 py-2 rounded">Save to Server</button>
+      <pre id="output" class="bg-gray-100 p-4 mt-4"></pre>
     </div>
+
+
+
 
     <div id="generateJSON" class="panel form-container">
       <h2>Merge JSON</h2>
@@ -187,7 +195,7 @@
         <li><button onclick="downloadFileWithAuth('series')">Download Series</button></li>
       </ul>
 
-    <button onclick="downloadWithAuth('https://moviemania-backend-31wk.onrender.com/api/backup/zip', 'backup.zip')">📦 Download Full Backup</button>
+    <button onclick="downloadWithAuth('http://localhost:3000/api/backup/zip', 'backup.zip')">📦 Download Full Backup</button>
     </div>
 
     <div id="notifications" class="panel form-container">

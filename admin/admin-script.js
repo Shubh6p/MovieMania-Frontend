@@ -1,4 +1,4 @@
-// admin-script.js (MovieMania_Final-main/admin)
+// admin-../script.js (MovieMania_Final-main/admin)
 function authFetch(url, options = {}) {
   const token = sessionStorage.getItem("jwt_token");
   if (!options.headers) options.headers = {};
@@ -70,7 +70,7 @@ function loadMyProfile() {
   const username = sessionStorage.getItem("admin_user");
   if (!username) return;
 
-  authFetch(`https://moviemania-backend-31wk.onrender.com/api/profile?username=${username}`)
+  authFetch(`http://localhost:3000/api/profile?username=${username}`)
 
     .then(res => res.json())
     .then(profile => {
@@ -113,7 +113,7 @@ function loadSessions() {
   const currentUser = sessionStorage.getItem("admin_user");
   const currentRole = document.getElementById("myProfileRole")?.textContent;
 
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/sessions")
+  authFetch("http://localhost:3000/api/sessions")
     .then(res => res.json())
     .then(data => {
       const tbody = document.getElementById("sessionLogs");
@@ -133,7 +133,7 @@ function loadSessions() {
 }
 
 function loadAdmins() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/admins")
+  authFetch("http://localhost:3000/api/admins")
     .then(res => res.json())
     .then(admins => {
       const tbody = document.getElementById("adminList");
@@ -157,7 +157,7 @@ function addAdmin() {
   const role = val("newAdminRole") || "admin";
   if (!username || !password) return alert("Username and password required");
 
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/admins", {
+  authFetch("http://localhost:3000/api/admins", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password, role }),
@@ -181,7 +181,7 @@ function deleteAdmin(username) {
   if (username === currentUser) return alert("You cannot delete yourself.");
   if (!confirm(`Delete admin '${username}'?`)) return;
 
-  authFetch(`https://moviemania-backend-31wk.onrender.com/api/admins/${username}`, { method: "DELETE" })
+  authFetch(`http://localhost:3000/api/admins/${username}`, { method: "DELETE" })
     .then(res => res.json())
     .then(data => {
       if (data.success) loadAdmins();
@@ -194,7 +194,7 @@ function updateAdminField(originalUsername, field, value) {
   if (field === "username") body.newUsername = value;
   else body[field] = value;
 
-  authFetch(`https://moviemania-backend-31wk.onrender.com/api/admins/${originalUsername}`, {
+  authFetch(`http://localhost:3000/api/admins/${originalUsername}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -212,7 +212,7 @@ function changeAdminPassword() {
   const password = val("newPassword");
   if (!username || !password) return alert("Both fields required");
 
-  authFetch(`https://moviemania-backend-31wk.onrender.com/api/admins/${username}`, {
+  authFetch(`http://localhost:3000/api/admins/${username}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ password })
@@ -227,7 +227,7 @@ function changeAdminPassword() {
 let movieList = [];
 
 function loadMoviesForEdit() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/movies")
+  authFetch("http://localhost:3000/api/movies")
     .then(res => res.json())
     .then(data => {
       movieList = data;
@@ -245,7 +245,7 @@ function loadMoviesForEdit() {
 // Edit Posts
 
 function loadMoviesForEdit() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/movies")
+  authFetch("http://localhost:3000/api/movies")
     .then(res => res.json())
     .then(movies => {
       const select = document.getElementById("movieSelect");
@@ -278,7 +278,7 @@ function fetchMovieDetails() {
   const id = document.getElementById("movieSelect").value;
   if (!id) return;
 
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/movies")
+  authFetch("http://localhost:3000/api/movies")
     .then(res => res.json())
     .then(movies => {
       const movie = movies.find(m => m.id === id);
@@ -325,7 +325,7 @@ function saveMovieEdits() {
     if (file) {
       const formData = new FormData();
       formData.append("poster", file);
-      authFetch("https://moviemania-backend-31wk.onrender.com/upload-poster", {
+      authFetch("http://localhost:3000/upload-poster", {
         method: "POST",
         body: formData,
       })
@@ -345,7 +345,7 @@ function saveMovieEdits() {
 }
 
 function sendMovieUpdate(id, data) {
-  authFetch(`https://moviemania-backend-31wk.onrender.com/updatemovie.html${id}`, {
+  authFetch(`http://localhost:3000/update/movie/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -381,7 +381,7 @@ function clearEditForm() {
 // Delete Movies and Series
 // Fetch Movies for Delete Option (with typing suggestions)
 function loadMoviesForDelete() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/movies")
+  authFetch("http://localhost:3000/api/movies")
     .then(res => res.json())
     .then(movies => {
       window.movieList = movies;  // Store the list of movies globally
@@ -398,10 +398,16 @@ function loadMoviesForDelete() {
 
 // Fetch Series for Delete Option (with typing suggestions)
 function loadSeriesForDelete() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/series")
+  authFetch("http://localhost:3000/api/series")
     .then(res => res.json())
     .then(series => {
-      window.seriesList = series;  // Store the list of series globally
+      if (!Array.isArray(series)) {
+        console.error("❌ Unexpected response for series:", series);
+        alert("Failed to load series list.");
+        return;
+      }
+
+      window.seriesList = series;  
       const seriesSelect = document.getElementById("seriesSelectDelete");
       seriesSelect.innerHTML = '<option value="">-- Select a Series --</option>';
       series.forEach(serie => {
@@ -410,8 +416,13 @@ function loadSeriesForDelete() {
         option.textContent = `${serie.title} (${serie.id})`;
         seriesSelect.appendChild(option);
       });
+    })
+    .catch(err => {
+      console.error("❌ Error fetching series:", err);
+      alert("Failed to load series.");
     });
 }
+
 
 // Filter Movies based on search input
 function filterMoviesForDelete() {
@@ -449,9 +460,14 @@ function filterSeriesForDelete() {
 
 // Call the loadMoviesForDelete and loadSeriesForDelete functions when the page is loaded
 document.addEventListener("DOMContentLoaded", () => {
-  loadMoviesForDelete();
-  loadSeriesForDelete();
+  if (document.getElementById("movieSelectDelete")) {
+    loadMoviesForDelete();
+  }
+  if (document.getElementById("seriesSelectDelete")) {
+    loadSeriesForDelete();
+  }
 });
+
 
 // Delete Movie Function
 function confirmDeleteMovie() {
@@ -459,45 +475,56 @@ function confirmDeleteMovie() {
   if (!movieId) return alert("Please select a movie to delete.");
 
   if (confirm(`Are you sure you want to delete the movie with ID: '${movieId}'?`)) {
-    authFetch(`https://moviemania-backend-31wk.onrender.com/api/delete/movie`, {
+    authFetch(`http://localhost:3000/api/delete/movie`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: movieId, deletedBy: sessionStorage.getItem("admin_user") })
     })
       .then(res => res.json())
-      .then(response => {
-        if (response.success) {
-          alert("Movie deleted successfully!");
-          loadMoviesForDelete();  // Refresh the dropdown after deletion
-        } else {
-          alert("Failed to delete movie.");
-        }
-      });
+        .then(response => {
+          if (response.success || response.deletedCount > 0 || response.message?.includes("deleted")) {
+            alert("✅ Movie deleted successfully!");
+            loadMoviesForDelete();
+          } else {
+            console.warn("Unexpected delete response:", response);
+            alert("❌ Failed to delete movie.");
+          }
+        })
+        .catch(err => {
+          console.error("❌ Delete error:", err);
+          alert("Error deleting movie.");
+        });
   }
 }
 
 // Delete Series Function
+// Delete Series Function (fixed)
 function confirmDeleteSeries() {
   const seriesId = document.getElementById("seriesSelectDelete").value;
   if (!seriesId) return alert("Please select a series to delete.");
 
   if (confirm(`Are you sure you want to delete the series with ID: '${seriesId}'?`)) {
-    authFetch(`https://moviemania-backend-31wk.onrender.com/api/delete/series`, {
+    authFetch(`http://localhost:3000/api/series/${seriesId}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: seriesId, deletedBy: sessionStorage.getItem("admin_user") })
+      headers: { "Content-Type": "application/json" }
     })
       .then(res => res.json())
       .then(response => {
-        if (response.success) {
-          alert("Series deleted successfully!");
-          loadSeriesForDelete();  // Refresh the dropdown after deletion
+        if (response.success || response.deletedCount > 0 || response.message?.includes("deleted")) {
+          alert("✅ Series deleted successfully!");
+          loadSeriesForDelete();
         } else {
-          alert("Failed to delete series.");
+          console.warn("Unexpected response:", response);
+          alert("❌ Failed to delete series.");
         }
+      })
+      .catch(err => {
+        console.error("❌ Delete error:", err);
+        alert("Error deleting series.");
       });
   }
 }
+
 
 
 // Download files only with auth
@@ -506,7 +533,7 @@ function downloadFileWithAuth(type) {
   const token = sessionStorage.getItem("jwt_token");
   if (!token) return alert("❌ Not authenticated.");
 
-  const url = `https://moviemania-backend-31wk.onrender.com/api/backup/${type}?token=${token}`;
+  const url = `http://localhost:3000/api/backup/${type}?token=${token}`;
   const a = document.createElement("a");
   a.href = url;
   a.download = `${type}.json`;
@@ -531,7 +558,7 @@ function downloadWithAuth(url, filename) {
 
 
 function loadAnalytics() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/stats")
+  authFetch("http://localhost:3000/api/stats")
     .then(res => res.json())
     .then(data => {
       document.getElementById("totalMovies").textContent = data.totalMovies;
@@ -542,11 +569,11 @@ function loadAnalytics() {
 }
 
 function downloadBackupZip() {
-  window.open("https://moviemania-backend-31wk.onrender.com/api/backup/zip", "_blank");
+  window.open("http://localhost:3000/api/backup/zip", "_blank");
 }
 
 function loadNotifications() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/notifications")
+  authFetch("http://localhost:3000/api/notifications")
     .then(res => res.json())
     .then((logs) => {
       const box = document.getElementById("notif_entries");
@@ -584,7 +611,7 @@ function deleteSelectedNotifications() {
 
   const timestampsToDelete = Array.from(checkboxes).map(cb => parseInt(cb.dataset.timestamp));
 
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/notifications/delete", {
+  authFetch("http://localhost:3000/api/notifications/delete", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ indexes: timestampsToDelete })
@@ -598,7 +625,7 @@ function deleteSelectedNotifications() {
 
 
 function updateNotificationDot() {
-  fetch("https://moviemania-backend-31wk.onrender.com/api/notifications")
+  fetch("http://localhost:3000/api/notifications")
     .then(res => res.json())
     .then(logs => {
       const dot = document.getElementById("notif-dot");
@@ -619,7 +646,7 @@ function saveToServer() {
   formData.append("poster", file);
 
   // Use regular fetch() with Authorization header manually
-  fetch("https://moviemania-backend-31wk.onrender.com/upload-poster", {
+  fetch("http://localhost:3000/upload-poster", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}` // 👈 required!
@@ -639,7 +666,7 @@ function saveToServer() {
           category: val("category").split(",").map(c => c.trim()),
           details: val("details"),
           image: uploadedPosterPath,
-          url: `movie.html?id=${val("id")}`,
+          url: `/movie/?id=${val("id")}`,
           releaseDate: val("releaseDate"),
           summary: val("summary"),
           rating: val("rating"),
@@ -655,7 +682,7 @@ function saveToServer() {
         };
 
         // Save movie using authFetch (JSON-based call)
-        authFetch("https://moviemania-backend-31wk.onrender.com/api/movies", {
+        authFetch("http://localhost:3000/api/movies", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(movie, null, 2),
@@ -688,94 +715,187 @@ function saveToServer() {
 }
 
 
+// ✅ Helper to get element value
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : "";
+}
+
+/* ----------------------------------------------------
+   Generate JSON Preview for Series
+---------------------------------------------------- */
 function generateSeriesJSON() {
-  const id = val("seriesId");
-  const title = val("seriesTitle");
-  const description = val("description");
-  const episodeCountRaw = val("episodeCount");
-  const episodeCount = parseInt(episodeCountRaw, 10);
-  const qualities = val("qualities").split(",").map((q) => q.trim());
-  const pattern = val("linkPattern");
+  const id = document.getElementById("seriesId").value.trim();
+  const title = document.getElementById("seriesTitle").value.trim();
+  const description = document.getElementById("description").value.trim();
+  const numSeasons = parseInt(document.getElementById("seasonCount").value, 10);
 
-  if (!id) return alert("❌ Series ID is missing.");
-  if (!title) return alert("❌ Title is missing.");
-  if (isNaN(episodeCount)) return alert("❌ Total episodes must be a number.");
+  if (!id || !title) return alert("❌ Series ID and Title are required");
+  if (isNaN(numSeasons) || numSeasons < 1) return alert("❌ Enter valid number of seasons");
 
-  const result = {
-    [id]: {
-      title,
-      description,
-      episodes: {
-        "480p": [],
-        "720p": [],
-        "1080p": []
-      }
+  const result = { id, title, description, seasons: [] };
+
+  for (let s = 1; s <= numSeasons; s++) {
+    const episodeCount = parseInt(document.getElementById(`season${s}-episodeCount`).value, 10);
+
+    const links480 = document.getElementById(`season${s}-480p`).value.split("\n").map(l => l.trim()).filter(Boolean);
+    const links720 = document.getElementById(`season${s}-720p`).value.split("\n").map(l => l.trim()).filter(Boolean);
+    const links1080 = document.getElementById(`season${s}-1080p`).value.split("\n").map(l => l.trim()).filter(Boolean);
+
+    let episodes = [];
+    for (let e = 0; e < episodeCount; e++) {
+      episodes.push({
+        episodeNumber: e + 1,
+        links: {
+          "480p": links480[e] || "",
+          "720p": links720[e] || "",
+          "1080p": links1080[e] || ""
+        }
+      });
     }
-  };
 
-  qualities.forEach((quality) => {
-    for (let i = 1; i <= episodeCount; i++) {
-      const link = pattern.replace("{id}", id).replace("{num}", i).replace("{quality}", quality);
-      result[id].episodes[quality].push({ title: `Episode ${i}`, link });
-    }
-  });
+    result.seasons.push({ seasonNumber: s, episodes });
+  }
 
   document.getElementById("output").textContent = JSON.stringify(result, null, 2);
 }
 
 
-
-function saveSeriesToServer() {
-  const jsonText = document.getElementById("output").textContent;
-  if (!jsonText) return alert("Please generate JSON first.");
-
-  let data;
+/* ----------------------------------------------------
+   Save Series to Backend Server
+---------------------------------------------------- */
+/* ----------------------------------------------------
+   Save Series to Backend Server (with JWT auth)
+---------------------------------------------------- */
+async function saveSeriesToServer() {
   try {
-    data = JSON.parse(jsonText);
-  } catch (e) {
-    return alert("Invalid JSON");
-  }
+    const seriesId = document.getElementById("seriesId").value.trim();
+    const title = document.getElementById("seriesTitle").value.trim();
+    const description = document.getElementById("description").value.trim();
+    const poster = document.getElementById("seriesPoster").value.trim();
+    const seasonCount = parseInt(document.getElementById("seasonCount").value.trim(), 10);
 
-  const seriesKey = Object.keys(data)[0];
-  const seriesData = data[seriesKey];
+    if (!seriesId || !title) {
+      alert("❌ Please provide both ID and Title");
+      return;
+    }
 
-  // Build the flat object MongoDB expects
-  const payload = {
-  [seriesKey]: {
-    title: seriesData.title,
-    description: seriesData.description,
-    episodes: seriesData.episodes,
-    addedBy: getAdminUsername()
-  }
-};
+    let seasons = [];
 
-console.log("Payload:", payload);
+    for (let s = 1; s <= seasonCount; s++) {
+      const episodeCount = parseInt(document.getElementById(`season${s}-episodeCount`).value, 10);
 
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/series", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.error) {
-        alert("❌ Error: " + res.error);
-      } else {
-        alert("✅ Series saved successfully.");
-        // Optional: clear form
-        document.getElementById("seriesId").value = "";
-        document.getElementById("seriesTitle").value = "";
-        document.getElementById("episodeCount").value = "";
-        document.getElementById("description").value = "";
-        document.getElementById("output").textContent = "";
+      const links480 = document.getElementById(`season${s}-480p`).value.split("\n").map(l => l.trim()).filter(Boolean);
+      const links720 = document.getElementById(`season${s}-720p`).value.split("\n").map(l => l.trim()).filter(Boolean);
+      const links1080 = document.getElementById(`season${s}-1080p`).value.split("\n").map(l => l.trim()).filter(Boolean);
+
+      let episodes = [];
+      for (let e = 0; e < episodeCount; e++) {
+        episodes.push({
+          episodeNumber: e + 1,
+          downloads: {   // 👈 match your /episodes/ viewer
+            "480p": links480[e] || "",
+            "720p": links720[e] || "",
+            "1080p": links1080[e] || ""
+          }
+        });
       }
-    })
-    .catch((err) => {
-      console.error("❌ Save error:", err);
-      alert("❌ Failed to save series.");
+
+      seasons.push({ seasonNumber: s, episodes });
+    }
+
+    const payload = { 
+      id: seriesId, 
+      title, 
+      description, 
+      poster, 
+      seasons,
+      addedBy: getAdminUsername()
+    };
+
+    // ✅ use authFetch so token is sent
+    const res = await authFetch("http://localhost:3000/api/series", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
     });
+
+    const data = await res.json();
+    if (res.ok) {
+      alert("✅ Series saved successfully!");
+      document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+    } else {
+      alert("❌ Failed to save series: " + (data.error || "Unknown error"));
+    }
+  } catch (err) {
+    console.error("❌ Error saving series:", err);
+    alert("Server error while saving series.");
+  }
 }
 
+
+
+/* ----------------------------------------------------
+   Render Season Inputs
+---------------------------------------------------- */
+function renderSeasonInputs() {
+  const container = document.getElementById("seasonInputs");
+  container.innerHTML = "";
+  const numSeasons = parseInt(document.getElementById("seasonCount").value, 10);
+
+  if (isNaN(numSeasons) || numSeasons < 1) return;
+
+  for (let s = 1; s <= numSeasons; s++) {
+    const seasonDiv = document.createElement("div");
+    seasonDiv.className = "season-block border rounded p-4 bg-gray-50";
+
+    seasonDiv.innerHTML = `
+      <h3 class="text-lg font-semibold mb-2">Season ${s}</h3>
+      <input id="season${s}-episodeCount" type="number" placeholder="Number of episodes"
+             class="border p-2 rounded w-full mb-3"/>
+      
+      <label class="block font-medium">480p Links (one per line)</label>
+      <textarea id="season${s}-480p" class="border p-2 rounded w-full h-28 mb-3"></textarea>
+
+      <label class="block font-medium">720p Links (one per line)</label>
+      <textarea id="season${s}-720p" class="border p-2 rounded w-full h-28 mb-3"></textarea>
+
+      <label class="block font-medium">1080p Links (one per line)</label>
+      <textarea id="season${s}-1080p" class="border p-2 rounded w-full h-28 mb-3"></textarea>
+    `;
+
+    container.appendChild(seasonDiv);
+  }
+}
+
+
+/* ----------------------------------------------------
+   Render Episode Inputs inside Season
+---------------------------------------------------- */
+function renderEpisodeInputs(season) {
+  const episodeCount = parseInt(val(`season${season}EpisodeCount`), 10);
+  const qualities = val("qualities").split(",").map(q => q.trim());
+  const epContainer = document.getElementById(`season${season}Episodes`);
+  epContainer.innerHTML = "";
+
+  if (isNaN(episodeCount) || episodeCount < 1) return;
+
+  for (let e = 1; e <= episodeCount; e++) {
+    const epDiv = document.createElement("div");
+    epDiv.classList.add("episode-block");
+    epDiv.innerHTML = `<h4>Episode ${e}</h4>`;
+
+    qualities.forEach(q => {
+      epDiv.innerHTML += `<input id="season${season}ep${e}_${q}" placeholder="${q} link" />`;
+    });
+
+    epContainer.appendChild(epDiv);
+  }
+}
+
+
+
+// Generate JSON
 
 function mergeAndFormatJSON() {
   const input = val("input");
@@ -801,23 +921,27 @@ function showPanel(id) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".nav a").forEach(link => {
-    link.addEventListener("click", e => {
-      e.preventDefault();
-      const target = link.dataset.panel;
-      showPanel(target);
+  const navLinks = document.querySelectorAll(".nav a");
+  if (navLinks.length > 0) {
+    navLinks.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const target = link.dataset.panel;
+        showPanel(target);
+      });
     });
-  });
+  }
 });
 
-// Login function for MovieMania-Frontend /admin/login.html
+
+// Login function for MovieMania-Frontend login.html
 function login() {
   const username = val("username");
   const password = val("password");
 
   console.log("Attempting login with:", username, password);
 
-  fetch("https://moviemania-backend-31wk.onrender.com/api/admin/login", {
+  fetch("http://localhost:3000/api/admin/login", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ username, password }),

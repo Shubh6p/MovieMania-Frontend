@@ -1,75 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Site Under Maintenance | MovieMania</title>
-  <link rel="icon" href="../assets/moviemania-logo.png" type="image/png">
-  <link rel="stylesheet" href="../../main.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet" />
+  <title>MovieMania | Maintenance Mode</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="../../assets/moviemania-logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet"/>
   <style>
-    .maintenance-section {
-      min-height: 100vh;
-      background-color: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
-      color: #fff;
-      flex-direction: column;
+    body { font-family: 'Rowdies', sans-serif; overflow:hidden; }
+
+    /* --- Intro --- */
+    #intro {
+      position: fixed; inset:0; background:black; display:flex;
+      align-items:center; justify-content:center; flex-direction:column;
+      z-index:50; transition:opacity 1s ease;
+    }
+    #intro h1 {
+      font-size:3rem; color:white; letter-spacing:4px;
+      text-shadow:0 0 20px red, 0 0 40px purple;
+      animation: zoomIn 3s ease forwards;
+    }
+    @keyframes zoomIn {
+      0% { transform:scale(0.5); opacity:0; }
+      100% { transform:scale(1); opacity:1; }
     }
 
-    .maintenance-section h1 {
-      font-family: 'Special Elite', cursive;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: blue;
+    /* --- Glitch Text --- */
+    .glitch {
+      position:relative; color:white; font-size:2.5rem; text-transform:uppercase;
+      animation:glitch-skew 1s infinite linear alternate-reverse;
     }
+    .glitch::before,.glitch::after {
+      content:attr(data-text); position:absolute; left:0; width:100%;
+      clip:rect(0,900px,0,0);
+    }
+    .glitch::before { left:2px; text-shadow:-2px 0 red; animation:glitchTop 2s infinite; }
+    .glitch::after { left:-2px; text-shadow:-2px 0 blue; animation:glitchBot 2s infinite; }
+    @keyframes glitchTop { 0%{clip:rect(0,9999px,0,0);} 50%{clip:rect(10px,9999px,80px,0);} 100%{clip:rect(0,9999px,0,0);} }
+    @keyframes glitchBot { 0%{clip:rect(0,9999px,0,0);} 50%{clip:rect(85px,9999px,140px,0);} 100%{clip:rect(0,9999px,0,0);} }
+    @keyframes glitch-skew { 0%{transform:skew(0deg);} 50%{transform:skew(1deg);} 100%{transform:skew(-1deg);} }
 
-    .maintenance-section p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin-bottom: 2rem;
-    }
+    /* --- Popcorn Rain --- */
+    .popcorn { position:absolute; top:-50px; font-size:2rem; animation:fall linear infinite; }
+    @keyframes fall { 0%{ transform:translateY(0) rotate(0deg);} 100%{ transform:translateY(110vh) rotate(360deg);} }
 
-    .spinner {
-      border: 6px solid #333;
-      border-top: 6px solid blue;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
-      margin-bottom: 1.5rem;
-    }
+    /* --- Hologram Flicker --- */
+    .holo { animation:flicker 5s infinite; }
+    @keyframes flicker { 0%,19%,21%,23%,25%,54%,56%,100% { opacity:1;} 20%,24%,55% { opacity:0.6;} }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    /* --- Laser Scan Border --- */
+    .scan-border {
+      position:relative;
+      overflow:hidden;
     }
+    .scan-border::after {
+      content:""; position:absolute; top:0; left:-100%; width:200%; height:4px;
+      background:linear-gradient(90deg, transparent, red, transparent);
+      animation:scan 3s linear infinite;
+    }
+    @keyframes scan { 0%{ left:-100%; } 100%{ left:100%; } }
 
-    .contact-btn {
-      background-color: blue;
-      color: white;
-      padding: 0.7rem 1.5rem;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
+    /* --- Background Stars --- */
+    .stars {
+      position:absolute; width:100%; height:100%; top:0; left:0;
+      background:url("https://www.transparenttextures.com/patterns/stardust.png");
+      animation:starMove 60s linear infinite;
     }
-
-    .contact-btn:hover {
-      background-color: #3366ff;
-    }
+    @keyframes starMove { from{background-position:0 0;} to{background-position:10000px 5000px;} }
   </style>
 </head>
-<body>
-  <div class="maintenance-section">
-    <div class="spinner"></div>
-    <h1>We'll Be Right Back!</h1>
-    <p>MovieMania is currently undergoing scheduled maintenance.<br>
-       We're working hard to bring everything back online as soon as possible.</p>
+<body class="bg-black text-white flex items-center justify-center min-h-screen relative">
+
+  <!-- Intro -->
+  <div id="intro">
+    <h1>🎬 MovieMania Studios</h1>
+    <p class="text-gray-400 mt-2">Presents...</p>
   </div>
+
+  <!-- Background Layers -->
+  <video autoplay loop muted class="absolute inset-0 w-full h-full object-cover opacity-20">
+    <source src="https://cdn.pixabay.com/vimeo/357872530/movie-film-strip-1920x1080.mp4" type="video/mp4">
+  </video>
+  <div class="stars"></div>
+
+  <!-- Popcorn Rain -->
+  <div id="popcorn-container"></div>
+
+  <!-- Main Card -->
+  <div id="main" class="opacity-0 relative z-10 p-8 max-w-2xl bg-black/70 backdrop-blur-lg rounded-2xl text-center border border-white/20 shadow-2xl scan-border tilt-card">
+    
+    <!-- Glitch Title -->
+    <h1 class="glitch mb-6 holo" data-text="We’ll Be Back Soon!">We’ll Be Back Soon!</h1>
+
+    <!-- Countdown -->
+    <div id="countdown" class="text-3xl font-bold text-red-400 mb-4 cursor-pointer">00:30:00</div>
+
+    <!-- Progress Bar -->
+    <div class="w-full h-3 bg-gray-800 rounded-full overflow-hidden mb-6">
+      <div id="progressBar" class="h-full bg-gradient-to-r from-red-500 to-purple-600"></div>
+    </div>
+
+    <!-- Typewriter -->
+    <p id="typewriter" class="text-gray-300 mb-6"></p>
+
+    <!-- Buttons -->
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/contact/" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-white shadow-lg">Contact Us</a>
+      <a href="https://t.me/MovieMania_Html" class="px-6 py-3 bg-green-500 hover:bg-green-600 rounded-lg text-white shadow-lg">Get Updates</a>
+    </div>
+  </div>
+
+  <script>
+    // Intro Transition
+    setTimeout(()=>{
+      document.getElementById("intro").style.opacity="0";
+      document.getElementById("main").style.opacity="1";
+    },4000);
+
+    // Countdown
+    let totalTime=1800; let time=totalTime;
+    const countdownEl=document.getElementById("countdown");
+    const progressBar=document.getElementById("progressBar");
+    setInterval(()=>{
+      const mins=String(Math.floor(time/60)).padStart(2,"0");
+      const secs=String(time%60).padStart(2,"0");
+      countdownEl.textContent=`00:${mins}:${secs}`;
+      progressBar.style.width=((totalTime-time)/totalTime)*100+"%";
+      if(time>0) time--;
+    },1000);
+
+    // Typewriter
+    const text="🍿 Upgrading MovieMania servers for a blockbuster experience... Stay tuned!";
+    let i=0;
+    function typeWriter(){
+      if(i<text.length){
+        document.getElementById("typewriter").textContent+=text.charAt(i);
+        i++;
+        setTimeout(typeWriter,50);
+      }
+    }
+    setTimeout(typeWriter,4500);
+
+    // Tilt Effect
+    const card=document.getElementById("main");
+    document.addEventListener("mousemove",e=>{
+      const x=(window.innerWidth/2 - e.pageX)/30;
+      const y=(window.innerHeight/2 - e.pageY)/30;
+      card.style.transform=`rotateY(${x}deg) rotateX(${y}deg)`;
+    });
+
+    // Popcorn Rain
+    const popcornContainer=document.getElementById("popcorn-container");
+    for(let j=0;j<25;j++){
+      const popcorn=document.createElement("div");
+      popcorn.className="popcorn";
+      popcorn.style.left=Math.random()*100+"vw";
+      popcorn.style.animationDuration=(3+Math.random()*5)+"s";
+      popcorn.innerHTML="🍿";
+      popcornContainer.appendChild(popcorn);
+    }
+
+    // Countdown click shake
+    countdownEl.addEventListener("click",()=>{
+      countdownEl.classList.add("animate-pulse");
+      setTimeout(()=>countdownEl.classList.remove("animate-pulse"),800);
+    });
+  </script>
 </body>
 </html>

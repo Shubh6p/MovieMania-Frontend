@@ -1,4 +1,4 @@
-// ✅ Updated script.js with Cloudinary-safe poster logic (including search results and full original content)
+// ✅ Updated ../script.js with Cloudinary-safe poster logic (including search results and full original content)
 
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
@@ -16,7 +16,7 @@ const isIndex = !!moviesContainer;
 const isMoviePage = window.location.pathname.includes('/movie/');
 
 if (isIndex) {
-  fetch('https://moviemania-backend-31wk.onrender.com/api/movies')
+  fetch('http://localhost:3000/api/movies')
     .then(response => response.json())
     .then(data => {
       allMovies = data;
@@ -169,7 +169,7 @@ if (isIndex) {
 
 if (isMoviePage) {
   const movieId = new URLSearchParams(window.location.search).get('id');
-  fetch('https://moviemania-backend-31wk.onrender.com/api/movie')
+  fetch('http://localhost:3000/api/movie')
     .then(res => res.json())
     .then(movies => {
       const movie = movies.find(m => m.id === movieId);
@@ -212,7 +212,7 @@ if (isMoviePage) {
 if (searchInput && searchResults) {
   let allSearchableMovies = [];
 
-  fetch('https://moviemania-backend-31wk.onrender.com/api/movies')
+  fetch('http://localhost:3000/api/movies')
     .then(response => response.json())
     .then(data => {
       allSearchableMovies = data;
