@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact MovieMania</title>
   <link rel="icon" href="../assets/moviemania-logo.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../main.css" />
   <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet">
 </head>
@@ -29,9 +30,19 @@
       <a href="#">Genre</a>
       <ul class="dropdown-menu">
         <li><a href="/home/?category=action">Action</a></li>
+        <li><a href="/home/?category=thriller">Thriller</a></li>
+        <li><a href="/home/?category=horror">Horror</a></li>
+        <li><a href="/home/?category=crime">Crime</a></li>
+        <li><a href="/home/?category=sci-fi">Sci-Fi</a></li>
         <li><a href="/home/?category=comedy">Comedy</a></li>
         <li><a href="/home/?category=drama">Drama</a></li>
         <li><a href="/home/?category=romance">Romance</a></li>
+        <li><a href="/home/?category=fantasy">Fantasy</a></li>
+        <li><a href="/home/?category=documentry">Documentry</a></li>
+        <li><a href="/home/?category=adventure">Adventure</a></li>
+        <li><a href="/home/?category=mystery">Mystery</a></li>
+        <li><a href="/home/?category=heist">Heist</a></li>
+        <li><a href="/home/?category=history">History</a></li>
         <li><a href="/home/?category=nudity">Nudity</a></li>
       </ul>
     </li>
@@ -60,23 +71,78 @@
     </section>
   </main>
 
-  <footer>
-    <div class="footer-container">
-      <div class="footer-section">
-        <p>Disclaimer: MovieMania does not host any files on its servers. All content points to third-party sites.</p>
+  <footer class="bg-[#222] text-gray-400 py-8 text-center">
+    <div class="max-w-[1000px] mx-auto">
+      <div>
+        <p>Disclaimer: MovieMania does not host any files on its servers. All point to content hosted on third-party websites.</p>
+        <p>MovieMania does not accept responsibility for content hosted on third-party websites and does not have any involvement in the same.</p>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 <a href="/home/">MovieMania</a>. All Rights Reserved.</p>
-        <a href="/contact/">Contact Us</a> | <a href="/about/">About Us</a> | <a href="/follow/">Follow Us</a>
+      <div class="mt-4">
+        <p>&copy; 2025 <a href="/home/" class="text-gray-400 hover:text-red-500">MovieMania</a>. All Rights Reserved.</p>
+      </div>
+      <div class="mt-2">
+        <a href="/contact/" class="text-gray-400 hover:text-red-500">Contact Us</a> | 
+        <a href="/about/" class="text-gray-400 hover:text-red-500">About Us</a> | 
+        <a href="/follow/" class="text-gray-400 hover:text-red-500">Follow Us</a>
       </div>
     </div>
   </footer>
-  <script>
-  document.querySelector(".contact-form").addEventListener("submit", function(e) {
+  <!-- Popup Modal -->
+<div id="successPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 hidden z-50">
+  <div class="bg-[#1e1e1e] text-white p-6 rounded-lg shadow-lg text-center max-w-sm mx-4">
+    <h3 class="text-lg font-bold text-red-500 mb-2">Thank You!</h3>
+    <p>Your response has been received. We’ll get back to you soon.</p>
+    <button id="closePopup" class="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg">Close</button>
+  </div>
+</div>
+
+<script>
+  const form = document.querySelector(".contact-form");
+  const popup = document.getElementById("successPopup");
+  const closePopup = document.getElementById("closePopup");
+
+  form.addEventListener("submit", function(e) {
     e.preventDefault();
-    alert("Thank you for contacting MovieMania! We’ll get back to you soon.");
+    popup.classList.remove("hidden"); // show popup
+    form.reset(); // clear form
+  });
+
+  closePopup.addEventListener("click", function() {
+    popup.classList.add("hidden"); // hide popup
+  });
+
+  // optional: close on background click
+  popup.addEventListener("click", function(e) {
+    if (e.target === popup) {
+      popup.classList.add("hidden");
+    }
   });
 </script>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+  const dropdowns = document.querySelectorAll('.dropdown');
+  const isMobile = () => window.innerWidth <= 768;
+
+  dropdowns.forEach(dropdown => {
+    const link = dropdown.querySelector('a');
+    link.addEventListener('click', (e) => {
+      if (isMobile()) {
+        e.preventDefault();
+        dropdown.classList.toggle('active');
+      }
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    dropdowns.forEach(dropdown => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+      }
+    });
+  });
+});
+    </script>
 
 </body>
 </html>

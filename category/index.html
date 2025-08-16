@@ -17,48 +17,48 @@
 </head>
 <body class="bg-[#111] text-white">
   <!-- Header -->
-  <header class="flex justify-between items-center flex-wrap p-4 md:p-6 bg-[#222] relative">
-    <h1 class="text-red-600 text-2xl md:text-3xl drop-shadow-lg">
-      <a href="/home/" class="no-underline">MovieMania</a>
-    </h1>
-    <button id="menuToggle" class="text-white text-3xl md:hidden">&#9776;</button>
-    <nav id="mainNav" class="hidden md:flex flex-col md:flex-row md:items-center md:space-x-4 absolute md:static top-full right-0 bg-[#222] md:bg-transparent w-48 md:w-auto z-50">
-      <ul class="nav-menu list-none flex flex-col md:flex-row gap-2 md:gap-4">
-        <li><a href="/home/" class="block px-3 py-2 hover:text-red-500">Home</a></li>
-        <li><a href="/category/?category=anime" class="block px-3 py-2 hover:text-red-500">Anime</a></li>
-        <li><a href="/category/?category=movie" class="block px-3 py-2 hover:text-red-500">Movies</a></li>
-        <li class="relative group">
-          <a href="#" class="block px-3 py-2 hover:text-red-500">Web Series</a>
-          <ul class="absolute hidden group-hover:block bg-[#111] min-w-[180px] z-50">
-            <li><a href="/home/?category=netflix" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Netflix</a></li>
-            <li><a href="/home/?category=prime-video" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Prime Video</a></li>
-            <li><a href="/home/?category=indian-web-series" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Indian</a></li>
-            <li><a href="/home/?category=foreign-web-series" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Foreign</a></li>
-          </ul>
-        </li>
-        <li class="relative group">
-          <a href="#" class="block px-3 py-2 hover:text-red-500">Genre</a>
-          <ul class="absolute hidden group-hover:block bg-[#111] min-w-[180px] z-50">
-            <li><a href="/home/?category=action" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Action</a></li>
-            <li><a href="/home/?category=thriller" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Thriller</a></li>
-            <li><a href="/home/?category=horror" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Horror</a></li>
-            <li><a href="/home/?category=crime" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Crime</a></li>
-            <li><a href="/home/?category=sci-fi" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Sci-Fi</a></li>
-            <li><a href="/home/?category=comedy" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Comedy</a></li>
-            <li><a href="/home/?category=drama" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Drama</a></li>
-            <li><a href="/home/?category=romance" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Romance</a></li>
-            <li><a href="/home/?category=fantasy" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Fantasy</a></li>
-            <li><a href="/home/?category=documentry" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Documentry</a></li>
-            <li><a href="/home/?category=adventure" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Adventure</a></li>
-            <li><a href="/home/?category=mystery" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Mystery</a></li>
-            <li><a href="/home/?category=heist" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Heist</a></li>
-            <li><a href="/home/?category=history" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">History</a></li>
-            <li><a href="/home/?category=nudity" class="block px-4 py-2 hover:bg-[#222] hover:text-red-500">Nudity</a></li>
-          </ul>
-        </li>
-        <li><a href="/donate/" class="block px-3 py-2 hover:text-red-500">Donate</a></li>
+  <header>
+    <h1><a href="/home/">MovieMania</a></h1>
+     <nav class="main-nav">
+  <ul class="nav-menu">
+    <li><a href="/home/">Home</a></li>
+    <li><a href="/category/?category=anime">Anime</a></li>
+    <li><a href="/category/?category=movie">Movies</a></li>
+
+    <li class="dropdown">
+      <a href="#">Web Series</a>
+      <ul class="dropdown-menu">
+        <li><a href="/home/?category=netflix">Netflix</a></li>
+        <li><a href="/home/?category=prime-video">Prime Video</a></li>
+        <li><a href="/home/?category=indian-web-series">Indian</a></li>
+        <li><a href="/home/?category=foreign-web-series">Foreign</a></li>
       </ul>
-    </nav>
+    </li>
+
+    <li class="dropdown">
+      <a href="#">Genre</a>
+      <ul class="dropdown-menu">
+        <li><a href="/home/?category=action">Action</a></li>
+        <li><a href="/home/?category=thriller">Thriller</a></li>
+        <li><a href="/home/?category=horror">Horror</a></li>
+        <li><a href="/home/?category=crime">Crime</a></li>
+        <li><a href="/home/?category=sci-fi">Sci-Fi</a></li>
+        <li><a href="/home/?category=comedy">Comedy</a></li>
+        <li><a href="/home/?category=drama">Drama</a></li>
+        <li><a href="/home/?category=romance">Romance</a></li>
+        <li><a href="/home/?category=fantasy">Fantasy</a></li>
+        <li><a href="/home/?category=documentry">Documentry</a></li>
+        <li><a href="/home/?category=adventure">Adventure</a></li>
+        <li><a href="/home/?category=mystery">Mystery</a></li>
+        <li><a href="/home/?category=heist">Heist</a></li>
+        <li><a href="/home/?category=history">History</a></li>
+        <li><a href="/home/?category=nudity">Nudity</a></li>
+      </ul>
+    </li>
+    <li><a href="/donate/">Donate</a></li>
+
+  </ul>
+</nav>
   </header>
 
   <!-- Top Filters -->
@@ -88,7 +88,7 @@
       </div>
       <div class="mt-2">
         <a href="/contact/" class="text-gray-400 hover:text-red-500">Contact Us</a> | 
-        <a href="/about" class="text-gray-400 hover:text-red-500">About Us</a> | 
+        <a href="/about/" class="text-gray-400 hover:text-red-500">About Us</a> | 
         <a href="/follow/" class="text-gray-400 hover:text-red-500">Follow Us</a>
       </div>
     </div>
@@ -96,9 +96,9 @@
 
   <script src="../script.js"></script>
   <script>
-  document.getElementById('menuToggle').addEventListener('click', () => {
-    document.getElementById('mainNav').classList.toggle('hidden');
-  });
+  // document.getElementById('menuToggle').addEventListener('click', () => {
+  //   document.getElementById('mainNav').classList.toggle('hidden');
+  // });
 
   window.addEventListener('DOMContentLoaded', () => {
     const url = new URL(window.location);

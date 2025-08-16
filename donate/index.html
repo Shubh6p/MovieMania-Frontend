@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Donate for MovieMania</title>
   <link rel="icon" href="../assets/moviemania-logo.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../main.css" />
   <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet" />
 </head>
@@ -29,9 +30,19 @@
       <a href="#">Genre</a>
       <ul class="dropdown-menu">
         <li><a href="/home/?category=action">Action</a></li>
+        <li><a href="/home/?category=thriller">Thriller</a></li>
+        <li><a href="/home/?category=horror">Horror</a></li>
+        <li><a href="/home/?category=crime">Crime</a></li>
+        <li><a href="/home/?category=sci-fi">Sci-Fi</a></li>
         <li><a href="/home/?category=comedy">Comedy</a></li>
         <li><a href="/home/?category=drama">Drama</a></li>
         <li><a href="/home/?category=romance">Romance</a></li>
+        <li><a href="/home/?category=fantasy">Fantasy</a></li>
+        <li><a href="/home/?category=documentry">Documentry</a></li>
+        <li><a href="/home/?category=adventure">Adventure</a></li>
+        <li><a href="/home/?category=mystery">Mystery</a></li>
+        <li><a href="/home/?category=heist">Heist</a></li>
+        <li><a href="/home/?category=history">History</a></li>
         <li><a href="/home/?category=nudity">Nudity</a></li>
       </ul>
     </li>
@@ -52,11 +63,11 @@
 
       <!-- UPI QR CODE -->
       <div style="text-align: center; margin: 2rem 0;">
-        <img src="../assets/donate-qr.jpg" alt="Scan to Donate UPI QR" style="max-width: 250px; width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+        <center><img src="../assets/donate-qr.jpg" alt="Scan to Donate UPI QR" style="max-width: 250px; width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"></center>
         <p style="margin-top: 0.5rem;">Scan this QR code using any UPI app to donate</p>
       </div>
 
-      <p>Thank you for supporting MovieMania! 💙</p>
+      <p><center>Thank you for supporting MovieMania! 💙</center></p>
 
       <div style="text-align: center; margin-top: 2rem;">
         <a href="/home/" class="contact-btn">Return to Home</a>
@@ -64,17 +75,19 @@
     </div>
   </section>
 
-  <footer>
-    <div class="footer-container">
-      <div class="footer-section">
+    <footer class="bg-[#222] text-gray-400 py-8 text-center">
+    <div class="max-w-[1000px] mx-auto">
+      <div>
         <p>Disclaimer: MovieMania does not host any files on its servers. All point to content hosted on third-party websites.</p>
         <p>MovieMania does not accept responsibility for content hosted on third-party websites and does not have any involvement in the same.</p>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 <a href="/home/">MovieMania</a>. All Rights Reserved.</p>
+      <div class="mt-4">
+        <p>&copy; 2025 <a href="/home/" class="text-gray-400 hover:text-red-500">MovieMania</a>. All Rights Reserved.</p>
       </div>
-      <div class="footer-bottom">
-        <a href="/contact/">Contact Us</a> | <a href="/about/">About Us</a> | <a href="/follow/">Follow Us</a>
+      <div class="mt-2">
+        <a href="/contact/" class="text-gray-400 hover:text-red-500">Contact Us</a> | 
+        <a href="/about/" class="text-gray-400 hover:text-red-500">About Us</a> | 
+        <a href="/follow/" class="text-gray-400 hover:text-red-500">Follow Us</a>
       </div>
     </div>
   </footer>
