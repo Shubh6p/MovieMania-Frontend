@@ -8,7 +8,7 @@ const categoryButtons = document.querySelectorAll('.category-btn');
 // API base (local vs deployed)
 const BASE_URL =
   location.hostname === 'localhost'
-    ? 'http://localhost:5000'
+    ? 'http://localhost:3000'
     : 'https://moviemania-backend-31wk.onrender.com';
 
 const itemsPerPage = 20;

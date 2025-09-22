@@ -10,7 +10,7 @@
 </head>
 <body onload="isAuthenticated(); loadMyProfile()">
   <div class="header">
-    <h1><a href="dashboard.html" style="color: inherit; text-decoration: none;">MovieMania Admin</a></h1>
+    <h1><a href="/dashboard/" style="color: inherit; text-decoration: none;">MovieMania Admin</a></h1>
     <div class="profile-container" tabindex="0">
       <div class="profile-icon">P</div>
         <div class="dropdown-menu">
@@ -195,7 +195,7 @@
         <li><button onclick="downloadFileWithAuth('series')">Download Series</button></li>
       </ul>
 
-    <button onclick="downloadWithAuth('http://localhost:3000/api/backup/zip', 'backup.zip')">📦 Download Full Backup</button>
+    <button onclick="downloadWithAuth('https://moviemania-backend-31wk.onrender.com/api/backup/zip', 'backup.zip')">📦 Download Full Backup</button>
     </div>
 
     <div id="notifications" class="panel form-container">
