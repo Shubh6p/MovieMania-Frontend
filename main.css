@@ -819,3 +819,122 @@ footer {
   background-color: white;
   color: red;
 }
+
+/* ===== Boot / Loading Overlay ===== */
+#loadingOverlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(1200px 800px at 50% 50%, #141414 0%, #0a0a0a 70%);
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  transition: opacity .35s ease;
+}
+#loadingOverlay.fade-out { opacity: 0; pointer-events: none; }
+
+.loader-card {
+  width: min(92vw, 520px);
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  background: rgba(22,22,22,.9);
+  box-shadow: 0 10px 40px rgba(0,0,0,.7), 0 0 0 2px rgba(255,0,0,.25) inset;
+  text-align: center;
+}
+
+.loader-card .brand {
+  font-family: 'Special Elite', cursive;
+  font-size: 2rem;
+  color: #ff3b3b;
+  text-shadow: 2px 2px 0 #000;
+  margin-bottom: .75rem;
+}
+
+.spinner {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  border: 5px solid #333;
+  border-top-color: #ff3b3b;
+  margin: 0 auto 1rem;
+  animation: spin 1s linear infinite;
+}
+
+#loaderMsg {
+  font-family: 'Rowdies', sans-serif;
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: .8rem;
+  min-height: 1.3em;
+}
+
+.progress {
+  height: 6px;
+  background: #1f1f1f;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+  max-width: 420px;
+}
+.progress .bar {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ff3b3b, #ff7a7a);
+  animation: indeterminate 2.2s ease-in-out infinite;
+}
+
+.retry {
+  background: transparent;
+  border: 2px solid #ff3b3b;
+  color: #fff;
+  font-weight: 700;
+  padding: .5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+  margin-bottom: .4rem;
+}
+.retry:hover { background: #ff3b3b; color: #111; }
+.hidden { display: none !important; }
+
+.hint {
+  display: block;
+  color: #bbb;
+  opacity: .8;
+  font-size: .75rem;
+}
+
+/* Motion-respect */
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+  .progress .bar { animation: none; width: 60%; }
+}
+
+/* ===== Skeleton grid for movie cards ===== */
+.skeleton-card {
+  background: #1a1a1a;
+  border-radius: 10px;
+  padding: 1rem;
+  min-height: 450px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.skel-thumb, .skel-title, .skel-lines > span {
+  background: linear-gradient(90deg, #1b1b1b 0%, #242424 50%, #1b1b1b 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: 6px;
+}
+.skel-thumb { width: 100%; height: 300px; }
+.skel-title { width: 80%; height: 18px; margin-top: .8rem; }
+.skel-lines { width: 100%; margin-top: .6rem; display: grid; gap: .5rem; }
+.skel-lines > span { width: 100%; height: 12px; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes indeterminate {
+  0% { transform: translateX(-50%); width: 20%; }
+  50% { transform: translateX(50%); width: 40%; }
+  100% { transform: translateX(150%); width: 20%; }
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

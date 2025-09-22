@@ -37,7 +37,7 @@
 <title>Movie Mania</title>
 <link rel="icon" href="../../assets/moviemania-logo.png" type="image/png">
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="../main.css">
+<link rel="stylesheet" href="main.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet">
@@ -87,17 +87,33 @@
 </nav>
   </header>
 
-  <div class="announcement-wrapper">
+  <!-- <div class="announcement-wrapper">
     <div class="announcement-text">
       Please wait ✋ contents are loading our server is slow bcz we are using free resources 📢 Make sure to <a href="/follow/" class="marquee-link">Join us on our Social Pages</a> and if you are happy with our services, please <a href="/donate/" class="marquee-link">Donate here</a>. ❤️
     </div>
-  </div>
+  </div> -->
 
 
     <!-- ===== Search Bar ===== -->
     <div class="search-bar">
         <input type="text" id="searchInput" placeholder="Search for a movie..." />
         <div id="searchResults" class="results-dropdown"></div>
+    </div>
+
+    <!-- Boot / Loading Overlay -->
+    <div id="loadingOverlay" aria-live="polite">
+      <div class="loader-card">
+        <div class="brand">MovieMania</div>
+        <div class="spinner" aria-hidden="true"></div>
+        <p id="loaderMsg">Connecting to server…</p>
+
+        <div class="progress">
+          <span class="bar" id="loaderProgress"></span>
+        </div>
+
+        <button id="retryBtn" class="retry hidden" type="button">Retry</button>
+        <small class="hint">Using free resources — warming up may take a moment.</small>
+      </div>
     </div>
 
 
@@ -125,7 +141,7 @@
     </div>
   </footer>
 
-    <script src="../script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>

@@ -6,7 +6,7 @@ if (!seriesId) {
   document.getElementById("series-title").textContent = "Series ID Missing";
   document.getElementById("series-desc").textContent = "Please provide a valid series ID in the URL.";
 } else {
-  fetch(`https://moviemania-backend-31wk.onrender.com/api/series/${seriesId}`)
+  fetch(`http://localhost:3000/api/series/${seriesId}`)
     .then(res => {
       if (!res.ok) throw new Error("Series not found");
       return res.json();

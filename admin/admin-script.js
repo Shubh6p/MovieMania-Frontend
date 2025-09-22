@@ -70,7 +70,7 @@ function loadMyProfile() {
   const username = sessionStorage.getItem("admin_user");
   if (!username) return;
 
-  authFetch(`https://moviemania-backend-31wk.onrender.com/api/profile?username=${username}`)
+  authFetch(`http://localhost:3000/api/profile?username=${username}`)
 
     .then(res => res.json())
     .then(profile => {
@@ -113,7 +113,7 @@ function loadSessions() {
   const currentUser = sessionStorage.getItem("admin_user");
   const currentRole = document.getElementById("myProfileRole")?.textContent;
 
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/sessions")
+  authFetch("http://localhost:3000/api/sessions")
     .then(res => res.json())
     .then(data => {
       const tbody = document.getElementById("sessionLogs");
@@ -133,7 +133,7 @@ function loadSessions() {
 }
 
 function loadAdmins() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/admins")
+  authFetch("http://localhost:3000/api/admins")
     .then(res => res.json())
     .then(admins => {
       const tbody = document.getElementById("adminList");
@@ -157,7 +157,7 @@ function addAdmin() {
   const role = val("newAdminRole") || "admin";
   if (!username || !password) return alert("Username and password required");
 
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/admins", {
+  authFetch("http://localhost:3000/api/admins", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password, role }),
@@ -181,7 +181,7 @@ function deleteAdmin(username) {
   if (username === currentUser) return alert("You cannot delete yourself.");
   if (!confirm(`Delete admin '${username}'?`)) return;
 
-  authFetch(`https://moviemania-backend-31wk.onrender.com/api/admins/${username}`, { method: "DELETE" })
+  authFetch(`http://localhost:3000/api/admins/${username}`, { method: "DELETE" })
     .then(res => res.json())
     .then(data => {
       if (data.success) loadAdmins();
@@ -194,7 +194,7 @@ function updateAdminField(originalUsername, field, value) {
   if (field === "username") body.newUsername = value;
   else body[field] = value;
 
-  authFetch(`https://moviemania-backend-31wk.onrender.com/api/admins/${originalUsername}`, {
+  authFetch(`http://localhost:3000/api/admins/${originalUsername}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -212,7 +212,7 @@ function changeAdminPassword() {
   const password = val("newPassword");
   if (!username || !password) return alert("Both fields required");
 
-  authFetch(`https://moviemania-backend-31wk.onrender.com/api/admins/${username}`, {
+  authFetch(`http://localhost:3000/api/admins/${username}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ password })
@@ -227,7 +227,7 @@ function changeAdminPassword() {
 let movieList = [];
 
 function loadMoviesForEdit() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/movies")
+  authFetch("http://localhost:3000/api/movies")
     .then(res => res.json())
     .then(data => {
       movieList = data;
@@ -245,7 +245,7 @@ function loadMoviesForEdit() {
 // Edit Posts
 
 function loadMoviesForEdit() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/movies")
+  authFetch("http://localhost:3000/api/movies")
     .then(res => res.json())
     .then(movies => {
       const select = document.getElementById("movieSelect");
@@ -278,7 +278,7 @@ function fetchMovieDetails() {
   const id = document.getElementById("movieSelect").value;
   if (!id) return;
 
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/movies")
+  authFetch("http://localhost:3000/api/movies")
     .then(res => res.json())
     .then(movies => {
       const movie = movies.find(m => m.id === id);
@@ -325,7 +325,7 @@ function saveMovieEdits() {
     if (file) {
       const formData = new FormData();
       formData.append("poster", file);
-      authFetch("https://moviemania-backend-31wk.onrender.com/upload-poster", {
+      authFetch("http://localhost:3000/upload-poster", {
         method: "POST",
         body: formData,
       })
@@ -345,7 +345,7 @@ function saveMovieEdits() {
 }
 
 function sendMovieUpdate(id, data) {
-  authFetch(`https://moviemania-backend-31wk.onrender.com/update/movie/${id}`, {
+  authFetch(`http://localhost:3000/update/movie/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -381,7 +381,7 @@ function clearEditForm() {
 // Delete Movies and Series
 // Fetch Movies for Delete Option (with typing suggestions)
 function loadMoviesForDelete() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/movies")
+  authFetch("http://localhost:3000/api/movies")
     .then(res => res.json())
     .then(movies => {
       window.movieList = movies;  // Store the list of movies globally
@@ -398,7 +398,7 @@ function loadMoviesForDelete() {
 
 // Fetch Series for Delete Option (with typing suggestions)
 function loadSeriesForDelete() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/series")
+  authFetch("http://localhost:3000/api/series")
     .then(res => res.json())
     .then(series => {
       if (!Array.isArray(series)) {
@@ -475,7 +475,7 @@ function confirmDeleteMovie() {
   if (!movieId) return alert("Please select a movie to delete.");
 
   if (confirm(`Are you sure you want to delete the movie with ID: '${movieId}'?`)) {
-    authFetch(`https://moviemania-backend-31wk.onrender.com/api/delete/movie`, {
+    authFetch(`http://localhost:3000/api/delete/movie`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: movieId, deletedBy: sessionStorage.getItem("admin_user") })
@@ -504,7 +504,7 @@ function confirmDeleteSeries() {
   if (!seriesId) return alert("Please select a series to delete.");
 
   if (confirm(`Are you sure you want to delete the series with ID: '${seriesId}'?`)) {
-    authFetch(`https://moviemania-backend-31wk.onrender.com/api/series/${seriesId}`, {
+    authFetch(`http://localhost:3000/api/series/${seriesId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" }
     })
@@ -533,7 +533,7 @@ function downloadFileWithAuth(type) {
   const token = sessionStorage.getItem("jwt_token");
   if (!token) return alert("❌ Not authenticated.");
 
-  const url = `https://moviemania-backend-31wk.onrender.com/api/backup/${type}?token=${token}`;
+  const url = `http://localhost:3000/api/backup/${type}?token=${token}`;
   const a = document.createElement("a");
   a.href = url;
   a.download = `${type}.json`;
@@ -558,7 +558,7 @@ function downloadWithAuth(url, filename) {
 
 
 function loadAnalytics() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/stats")
+  authFetch("http://localhost:3000/api/stats")
     .then(res => res.json())
     .then(data => {
       document.getElementById("totalMovies").textContent = data.totalMovies;
@@ -569,11 +569,11 @@ function loadAnalytics() {
 }
 
 function downloadBackupZip() {
-  window.open("https://moviemania-backend-31wk.onrender.com/api/backup/zip", "_blank");
+  window.open("http://localhost:3000/api/backup/zip", "_blank");
 }
 
 function loadNotifications() {
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/notifications")
+  authFetch("http://localhost:3000/api/notifications")
     .then(res => res.json())
     .then((logs) => {
       const box = document.getElementById("notif_entries");
@@ -611,7 +611,7 @@ function deleteSelectedNotifications() {
 
   const timestampsToDelete = Array.from(checkboxes).map(cb => parseInt(cb.dataset.timestamp));
 
-  authFetch("https://moviemania-backend-31wk.onrender.com/api/notifications/delete", {
+  authFetch("http://localhost:3000/api/notifications/delete", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ indexes: timestampsToDelete })
@@ -625,7 +625,7 @@ function deleteSelectedNotifications() {
 
 
 function updateNotificationDot() {
-  fetch("https://moviemania-backend-31wk.onrender.com/api/notifications")
+  fetch("http://localhost:3000/api/notifications")
     .then(res => res.json())
     .then(logs => {
       const dot = document.getElementById("notif-dot");
@@ -646,7 +646,7 @@ function saveToServer() {
   formData.append("poster", file);
 
   // Use regular fetch() with Authorization header manually
-  fetch("https://moviemania-backend-31wk.onrender.com/upload-poster", {
+  fetch("http://localhost:3000/upload-poster", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}` // 👈 required!
@@ -682,7 +682,7 @@ function saveToServer() {
         };
 
         // Save movie using authFetch (JSON-based call)
-        authFetch("https://moviemania-backend-31wk.onrender.com/api/movies", {
+        authFetch("http://localhost:3000/api/movies", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(movie, null, 2),
@@ -814,7 +814,7 @@ async function saveSeriesToServer() {
     };
 
     // ✅ use authFetch so token is sent
-    const res = await authFetch("https://moviemania-backend-31wk.onrender.com/api/series", {
+    const res = await authFetch("http://localhost:3000/api/series", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -941,7 +941,7 @@ function login() {
 
   console.log("Attempting login with:", username, password);
 
-  fetch("https://moviemania-backend-31wk.onrender.com/api/admin/login", {
+  fetch("http://localhost:3000/api/admin/login", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ username, password }),
