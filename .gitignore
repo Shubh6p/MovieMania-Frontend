@@ -1,0 +1,7 @@
+# Logs
+*.log
+notifications.log
+
+# System files
+.DS_Store
+Thumbs.db
