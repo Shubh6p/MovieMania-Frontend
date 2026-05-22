@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found - MovieMania</title>
+  <link rel="icon" href="/assets/moviemania-logo.png" type="image/png">
+  
+  <!-- Modern Typography and Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind CSS for modern layout structure -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at center, #1b0c16 0%, #080309 100%);
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Glow effects */
+    .glow-text {
+      text-shadow: 0 0 15px rgba(255, 0, 85, 0.7), 0 0 30px rgba(255, 0, 85, 0.4);
+      font-family: 'Special Elite', cursive;
+    }
+    
+    .glow-box {
+      box-shadow: 0 0 30px rgba(255, 0, 85, 0.2);
+      border: 1px solid rgba(255, 0, 85, 0.2);
+      backdrop-filter: blur(12px);
+      background: rgba(20, 10, 20, 0.6);
+    }
+
+    /* Cinematic particles & reels animation */
+    .film-grain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .shutter-light {
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 70%;
+      background: radial-gradient(ellipse at top, rgba(255, 0, 85, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+      animation: pulseLight 6s ease-in-out infinite;
+    }
+
+    @keyframes pulseLight {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+    }
+
+    /* 404 Glitch animation */
+    .glitch {
+      position: relative;
+      animation: bounce 3s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* HSL Gradient Button with dynamic scale & hover */
+    .btn-gradient {
+      background: linear-gradient(135deg, hsl(340, 100%, 50%) 0%, hsl(260, 100%, 55%) 100%);
+      box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .btn-gradient:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(255, 0, 85, 0.6);
+    }
+
+    /* Search overlay drop shadow */
+    .search-input:focus {
+      box-shadow: 0 0 15px rgba(255, 0, 85, 0.5);
+      border-color: rgba(255, 0, 85, 0.8);
+    }
+
+    .result-link:hover {
+      background: linear-gradient(90deg, rgba(255, 0, 85, 0.2) 0%, transparent 100%);
+    }
+
+    /* Star field animation */
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: twinkle 4s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.8; }
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen relative justify-between">
+
+  <div class="film-grain"></div>
+  <div class="shutter-light"></div>
+
+  <!-- Ambient Floating Stars -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="star" style="top: 15%; left: 20%; animation-delay: 0s;"></div>
+    <div class="star" style="top: 40%; left: 10%; animation-delay: 1.5s;"></div>
+    <div class="star" style="top: 75%; left: 25%; animation-delay: 3s;"></div>
+    <div class="star" style="top: 25%; left: 85%; animation-delay: 0.8s;"></div>
+    <div class="star" style="top: 60%; left: 90%; animation-delay: 2.2s;"></div>
+    <div class="star" style="top: 80%; left: 70%; animation-delay: 1.7s;"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="w-full flex items-center justify-between px-8 py-6 z-10 relative">
+    <h1 class="text-3xl font-extrabold tracking-wider"><a href="/home/" class="text-red-500 hover:text-red-400 transition" style="font-family: 'Special Elite', cursive; text-shadow: 2px 2px 4px black;">MovieMania</a></h1>
+    <a href="/home/" class="text-gray-400 hover:text-white transition font-medium text-lg flex items-center gap-2">
+      <i class="fa-solid fa-arrow-left"></i> Back to Safety
+    </a>
+  </header>
+
+  <!-- Main Content Card -->
+  <main class="flex-grow flex items-center justify-center px-6 py-12 z-10 relative">
+    <div class="glow-box max-w-lg w-full rounded-3xl p-8 sm:p-10 text-center relative overflow-hidden transition-all duration-300">
+      
+      <!-- Film projector icon -->
+      <div class="text-pink-500 text-6xl mb-4 animate-pulse">
+        <i class="fa-solid fa-video-slash"></i>
+      </div>
+
+      <!-- 404 Glitch Number -->
+      <h2 class="text-8xl sm:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500 glitch glow-text mb-2">404</h2>
+      
+      <h3 class="text-2xl sm:text-3xl font-bold mb-4 tracking-wide text-pink-400">Scene Not Found!</h3>
+      
+      <p class="text-gray-300 mb-8 leading-relaxed text-sm sm:text-base">
+        Lights out! The page you are looking for has been cut from the final edit, or it was never filmed. Let's find you another blockbuster!
+      </p>
+
+      <!-- Dynamic Search Bar on 404 -->
+      <div class="relative w-full max-w-sm mx-auto mb-8 z-20">
+        <div class="relative">
+          <input type="text" id="searchInput" placeholder="Search for another movie..." autocomplete="off"
+            class="w-full px-5 py-3 pl-12 bg-gray-900 bg-opacity-80 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 text-white placeholder-gray-500 search-input transition duration-300 text-sm sm:text-base" />
+          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
+        </div>
+        <!-- Search Results Dropdown -->
+        <div id="searchResults" class="absolute top-full left-0 w-full mt-2 bg-gray-950 bg-opacity-95 border border-gray-800 rounded-xl shadow-2xl z-50 overflow-y-auto max-h-60 text-left hidden scrollbar-thin"></div>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="/home/" class="w-full sm:w-auto px-8 py-3.5 btn-gradient rounded-xl font-bold tracking-wide text-sm transition">
+          <i class="fa-solid fa-house mr-2"></i> Go Back Home
+        </a>
+        <a href="/category/?category=movie" class="w-full sm:w-auto px-8 py-3.5 bg-gray-850 hover:bg-gray-800 border border-gray-700 hover:border-pink-500 rounded-xl font-bold tracking-wide text-sm transition flex justify-center items-center gap-2">
+          <i class="fa-solid fa-clapperboard"></i> Browse Movies
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full text-center py-6 text-gray-500 text-xs sm:text-sm z-10 relative bg-[#060207] bg-opacity-65 border-t border-gray-950">
+    <p>&copy; 2026 MovieMania. The final scene was cut. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Single Link of Backend Endpoint at a Single Point -->
+  <script src="/api-config.js"></script>
+  
+  <!-- Interactive script for 404 search engine functionality -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchInput = document.getElementById('searchInput');
+      const searchResults = document.getElementById('searchResults');
+      const BASE_URL = window.API_BASE_URL || 'http://localhost:3000';
+
+      if (!searchInput || !searchResults) return;
+
+      function debounce(func, delay) {
+        let timeout;
+        return (...args) => {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), delay);
+        };
+      }
+
+      document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+          searchResults.classList.add('hidden');
+        }
+      });
+
+      searchResults.classList.add('hidden');
+
+      // Fetch from the centralized backend URL configured in api-config.js
+      fetch(`${BASE_URL}/api/movies`)
+        .then(res => {
+          if (!res.ok) throw new Error("API Offline");
+          return res.json();
+        })
+        .then(movies => {
+          const handleSearch = () => {
+            const query = searchInput.value.toLowerCase().trim();
+            searchResults.innerHTML = '';
+
+            if (query.length === 0) {
+              searchResults.classList.add('hidden');
+              return;
+            }
+
+            let found = false;
+
+            movies.forEach(movie => {
+              const title = movie.title.toLowerCase();
+
+              if (title.includes(query)) {
+                const posterUrl = movie.poster?.startsWith('http') ? movie.poster : '/images/' + movie.poster;
+                const resultItem = document.createElement('div');
+                resultItem.classList.add('result-item', 'border-b', 'border-gray-900', 'transition');
+                resultItem.innerHTML = `
+                  <a href="/movie/?id=${movie._id}" class="result-link flex items-center p-3 text-sm text-gray-300 hover:text-white transition duration-200">
+                    <img src="${posterUrl}" onerror="this.src='/images/default.jpg'" class="w-8 h-12 object-cover rounded mr-3 shadow-md border border-gray-800" />
+                    <span class="font-semibold">${movie.title}</span>
+                  </a>
+                `;
+                searchResults.appendChild(resultItem);
+                found = true;
+              }
+            });
+
+            if (!found) {
+              searchResults.innerHTML = '<p class="p-4 text-center text-xs text-gray-500">No blockbusters found matching that title.</p>';
+            }
+
+            searchResults.classList.remove('hidden');
+          };
+
+          searchInput.addEventListener('input', debounce(handleSearch, 300));
+          searchInput.addEventListener('focus', () => {
+            if (searchInput.value.trim().length > 0) {
+              searchResults.classList.remove('hidden');
+            }
+          });
+        })
+        .catch(err => {
+          console.warn('Search on 404 load error:', err);
+        });
+    });
+  </script>
+</body>
+</html>

@@ -6,6 +6,7 @@
   <title>Admin Panel - MovieMania</title>
   <link rel="stylesheet" href="../admin-style.css" />
   <link rel="icon" href="../assets/moviemania-logo.png" type="image/png">
+  <script src="/api-config.js"></script>
   <script src="../admin-script.js" defer></script>
 </head>
 <body onload="isAuthenticated(); loadMyProfile()">
@@ -195,7 +196,7 @@
         <li><button onclick="downloadFileWithAuth('series')">Download Series</button></li>
       </ul>
 
-    <button onclick="downloadWithAuth('https://moviemania-backend-31wk.onrender.com/api/backup/zip', 'backup.zip')">📦 Download Full Backup</button>
+    <button onclick="downloadWithAuth(BASE_URL + '/api/backup/zip', 'backup.zip')">📦 Download Full Backup</button>
     </div>
 
     <div id="notifications" class="panel form-container">

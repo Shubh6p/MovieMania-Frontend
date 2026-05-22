@@ -2,11 +2,13 @@ const params = new URLSearchParams(window.location.search);
 const seriesId = params.get("series");
 const quality = params.get("quality") || "480p";
 
+const BASE_URL = window.API_BASE_URL || 'http://localhost:3000';
+
 if (!seriesId) {
   document.getElementById("series-title").textContent = "Series ID Missing";
   document.getElementById("series-desc").textContent = "Please provide a valid series ID in the URL.";
 } else {
-  fetch(`https://moviemania-backend-31wk.onrender.com/api/series/${seriesId}`)
+  fetch(`${BASE_URL}/api/series/${seriesId}`)
     .then(res => {
       if (!res.ok) throw new Error("Series not found");
       return res.json();
@@ -108,7 +110,6 @@ if (!seriesId) {
     })
     .catch(err => {
       console.error("Error loading series:", err);
-      document.getElementById("series-title").textContent = "Series Not Found";
-      document.getElementById("series-desc").textContent = "The requested series could not be loaded.";
+      window.location.href = '/404.html';
     });
 }

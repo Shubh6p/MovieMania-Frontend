@@ -2,8 +2,10 @@
 const params = new URLSearchParams(window.location.search);
 const movieId = params.get('id');
 
+const BASE_URL = window.API_BASE_URL || 'http://localhost:3000';
+
 // Load movie data from JSON
-fetch('https://moviemania-backend-31wk.onrender.com/api/movies')
+fetch(`${BASE_URL}/api/movies`)
   .then(res => {
     if (!res.ok) throw new Error('Network response was not ok');
     return res.json();
@@ -11,11 +13,7 @@ fetch('https://moviemania-backend-31wk.onrender.com/api/movies')
   .then(movies => {
     const movie = movies.find(m => m._id === movieId);
     if (!movie) {
-      document.body.innerHTML = `
-        <div style="text-align:center; padding:2rem;">
-          <h2>Movie not found</h2>
-          <a href="/home/" style="color:blue;">Return to homepage</a>
-        </div>`;
+      window.location.href = '/404.html';
       return;
     }
 
@@ -88,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  fetch('https://moviemania-backend-31wk.onrender.com/api/movies')
+  fetch(`${BASE_URL}/api/movies`)
     .then(res => res.json())
     .then(movies => {
       const handleSearch = () => {
